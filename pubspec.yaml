@@ -1,0 +1,36 @@
+name: KinesteX_B2B
+description: KinesteX B2B
+publish_to: "none"
+version: 1.0.3+4
+
+environment:
+  sdk: ">=3.0.1 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  permission_handler: ^9.0.0
+  shared_preferences: ^2.0.13
+
+  lottie: ^2.7.0
+
+
+  intl:
+    ^0.17.0
+  cupertino_icons: ^1.0.2
+
+  # KinesTex web view
+  kinestex_sdk_flutter: ^0.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+  assets:
+    - assets/yoga_animation.json
+  
+  uses-material-design: true
