@@ -167,7 +167,6 @@ The core of the `handleMessage` function is a switch statement that checks the `
     - `exitApp`: Logs when the KinesteX window is closed and sets the `showWebview` to false, which will hide the WebView.
     - `default`: For all other message types, it just logs the received type and data.
 
-An example code is located in the test -> kinestex_sdk_flutter_test.dart file
 
 ### Contact
 Please contact help@kinestex.com if you have any questions
