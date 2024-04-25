@@ -40,7 +40,7 @@ kinestex_sdk_flutter: ^@latest
 | **Rehabilitation** | 
 
 
-### Available categories and sub categories to sort workouts:
+### Available categories to sort workouts:
 
 | **Category (key: category)** |
 | --- | 
