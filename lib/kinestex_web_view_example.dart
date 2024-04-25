@@ -31,7 +31,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
-  String url = "https://kineste-x-w.vercel.app/";
 
   bool _isLottieVisible =
       true; // State to control Lottie visibility and animation
