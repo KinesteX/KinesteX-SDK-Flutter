@@ -1,7 +1,7 @@
 name: KinesteX_B2B
-description: KinesteX B2B
+description: KinesteX SDK Demo
 publish_to: "none"
-version: 1.0.3+4
+version: 1.0.0+1
 
 environment:
   sdk: ">=3.0.1 <4.0.0"
@@ -13,6 +13,8 @@ dependencies:
   permission_handler: ^9.0.0
   shared_preferences: ^2.0.13
 
+  kinestex_sdk_flutter: ^1.0.7
+
   lottie: ^2.7.0
 
 
@@ -20,8 +22,10 @@ dependencies:
     ^0.17.0
   cupertino_icons: ^1.0.2
 
-  # KinesTex web view
-  kinestex_sdk_flutter: ^0.0.1
+  # # KinesTex web view
+  # kinestex_sdk_flutter: ^0.0.1
+
+  expandable_widgets: ^1.0.3+1
 
 dev_dependencies:
   flutter_test:
