@@ -1,31 +1,6 @@
 enum IntegrationOptionType {
-  COMPLETE_UX(
-    title: 'Complete UX',
-    category: 'Goal Category',
-    subOptions: ['Cardio', 'Strength', 'Rehabilitation', 'WeightManagement'],
-  ),
-  WORKOUT_PLAN(
-    title: 'Workout Plan',
-    category: 'Plan',
-    subOptions: ['Full Cardio', 'Elastic Evolution', 'Circuit Training', 'Fitness Cardio'],
-  ),
-  WORKOUT(
-    title: 'Workout',
-    category: 'Workout',
-    subOptions: ['Fitness Lite', 'Circuit Training', 'Tabata'],
-  ),
-  CHALLENGE(
-    title: 'Challenge',
-    category: 'Challenge',
-    subOptions: ['Squats', 'Jumping Jack'],
-  ),
-  CAMERA(
-    title: 'Camera',
-    category: '',
-    subOptions: [],
-  );
 
-  final String title;
+    final String title;
   final String category;
   final List<String>? subOptions;
 
@@ -34,6 +9,50 @@ enum IntegrationOptionType {
     required this.category,
     this.subOptions,
   });
+
+  COMPLETE_UX(
+    title: 'Complete UX',
+    category: 'Goal Category',
+    subOptions: [
+      'Cardio',
+      'Strength',
+      'Rehabilitation',
+      'WeightManagement',
+    ],
+  ),
+  WORKOUT_PLAN(
+    title: 'Workout Plan',
+    category: 'Plan',
+    subOptions: <String>[
+      'Full Cardio',
+      'Elastic Evolution',
+      'Circuit Training',
+      'Fitness Cardio',
+    ],
+  ),
+  WORKOUT(
+    title: 'Workout',
+    category: 'Workout',
+    subOptions: <String>[
+      'Fitness Lite',
+      'Circuit Training',
+      'Tabata',
+    ],
+  ),
+  CHALLENGE(
+    title: 'Challenge',
+    category: 'Challenge',
+    subOptions: <String>[
+      'Squats',
+      'Jumping Jack',
+    ],
+  ),
+  CAMERA(
+    title: 'Camera',
+    category: '',
+    subOptions: <String>[],
+  );
+
 
   static IntegrationOptionType? fromPosition(int position) {
     if (position < 0 || position >= IntegrationOptionType.values.length) {
