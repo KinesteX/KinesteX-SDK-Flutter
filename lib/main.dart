@@ -1,15 +1,12 @@
-// import 'package:KinesteX_B2B/kinestex_web_view_example1.dart';
-import 'package:flutter/material.dart';
-import 'package:kinestex_sdk_flutter/models/kinestex_view_state.dart';
+import 'package:KinesteX_B2B/export.dart';
 
-import 'package:provider/provider.dart';
-import 'home.dart';
-
-Future<void> main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
     ChangeNotifierProvider(
-      create: (context) => KinesteXViewState(),
+      create: (BuildContext context) {
+        return KinesteXViewState();
+      },
       child: const MyApp(),
     ),
   );
@@ -24,8 +21,6 @@ class MyApp extends StatelessWidget {
       title: 'KinesteX SDK App',
       home: const MyHomePage(),
       theme: ThemeData(primarySwatch: Colors.blue),
-
-      // Updated CircularProgressIndicator with size and centering
     );
   }
 }
