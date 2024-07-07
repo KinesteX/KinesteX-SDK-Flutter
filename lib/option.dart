@@ -1,15 +1,4 @@
 enum IntegrationOptionType {
-
-    final String title;
-  final String category;
-  final List<String>? subOptions;
-
-  const IntegrationOptionType({
-    required this.title,
-    required this.category,
-    this.subOptions,
-  });
-
   COMPLETE_UX(
     title: 'Complete UX',
     category: 'Goal Category',
@@ -53,7 +42,20 @@ enum IntegrationOptionType {
     subOptions: <String>[],
   );
 
+  final String title;
+  final String category;
+  final List<String>? subOptions;
 
+  const IntegrationOptionType({
+    required this.title,
+    required this.category,
+    this.subOptions,
+  });
+
+  /// Returns the `IntegrationOptionType` enum value at the given position.
+  ///
+  /// @param position The index of the `IntegrationOptionType` to retrieve.
+  /// @return The `IntegrationOptionType` at the given position, or `null` if the position is out of bounds.
   static IntegrationOptionType? fromPosition(int position) {
     if (position < 0 || position >= IntegrationOptionType.values.length) {
       return null;
@@ -74,6 +76,15 @@ class IntegrationOption {
   });
 }
 
+/// Generates a list of `IntegrationOption` objects based on the values of `IntegrationOptionType`.
+///
+/// Returns a list of `IntegrationOption` objects, where each object is created from an `IntegrationOptionType` value.
+/// The `title` of each `IntegrationOption` is set to the `title` of the corresponding `IntegrationOptionType`.
+/// The `optionType` of each `IntegrationOption` is set to the `category` of the corresponding `IntegrationOptionType`.
+/// The `subOption` of each `IntegrationOption` is set to the `subOptions` of the corresponding `IntegrationOptionType`,
+/// converted to a list.
+///
+/// Returns a `List<IntegrationOption>`.
 List<IntegrationOption> generateOptions() {
   return IntegrationOptionType.values.map((optionType) {
     return IntegrationOption(
