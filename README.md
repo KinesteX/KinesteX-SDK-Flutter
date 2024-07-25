@@ -44,7 +44,7 @@ Add the following dependency to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-   kinestex_sdk_flutter: ^@latest
+   kinestex_sdk_flutter: ^1.1.6
 ```
 
 ## Usage
@@ -107,32 +107,35 @@ void _showCameraAccessDeniedAlert() {
 1. Create a handleMessage function to process messages from KinesteX SDK:
 
 ```dart
-ValueNotifier<bool> showKinesteX = ValueNotifier<bool>(false);
+ ValueNotifier<bool> showKinesteX = ValueNotifier<bool>(false);
 
 void handleWebViewMessage(WebViewMessage message) {
-   switch (message.type) {
-      case 'exit_kinestex':
-      // hide KinesteX view
-         showKinesteX.value = false;
-         break;
-   // Handle all other cases as needed
-      default:
-         log('Other message: ${message.data}');
-   }
+  if (message is ExitKinestex) {
+    // Handle ExitKinestex message
+    setState(() {
+      showKinesteX.value = false;
+    });
+  }  else {
+    // Handle other message types
+    print("Other message received: ${message.data}");
+  }
 }
 ```
 
 2. Display KinesteX with Main Integration Option:
 
 ```dart
-KinesteXAIFramework.createMainView(
-apiKey: 'YOUR API KEY',
-companyName: 'YOUR COMPANY',
-userId: 'YOUR USER ID',
-planCategory: PlanCategory.Cardio, // pass the plan category
-isShowKinesTex: showKinesteX,
-isLoading: ValueNotifier<bool>(false),
-onMessageReceived: handleWebViewMessage,
+  KinesteXAIFramework.createMainView(
+    apiKey: apiKey,
+    companyName: company,
+    isShowKinestex: showKinesteX,
+    userId: userId,
+    planCategory: PlanCategory.Cardio,  // plan category
+    data: <String, dynamic>{ 'isHideHeaderMain': false }, // optional custom parameters
+    isLoading: ValueNotifier<bool>(false),
+    onMessageReceived: (message) {
+     handleWebViewMessage(message);
+    },
 );
 ```
 
@@ -141,114 +144,107 @@ onMessageReceived: handleWebViewMessage,
 **Individual Plan**
 
 ```dart
-KinesteXAIFramework.createPlanView(
-apiKey: 'YOUR API KEY',
-companyName: 'YOUR COMPANY',
-userId: 'YOUR USER ID',
-planName: 'Circuit Training', // pass the name of the plan
-isShowKinesTex: showKinesteX,
-isLoading: ValueNotifier<bool>(false),
-onMessageReceived: handleWebViewMessage,
-);
+  KinesteXAIFramework.createPlanView(
+    apiKey: apiKey,
+    companyName: company,
+    userId: userId,
+    isShowKinestex: showKinesteX,
+    planName: "Circuit Training",
+    isLoading: ValueNotifier<bool>(false),
+    onMessageReceived: (message) {
+      handleWebViewMessage(message);
+    }
+    );
 ```
 
 **Individual Workout**
 
 ```dart
-KinesteXAIFramework.createWorkoutView(
-apiKey: 'YOUR API KEY',
-companyName: 'YOUR COMPANY',
-userId: 'YOUR USER ID',
-workoutName: 'Circuit Training', // pass the name of the workout
-isShowKinesTex: showKinesteX,
-isLoading: ValueNotifier<bool>(false),
-onMessageReceived: handleWebViewMessage,
+  KinesteXAIFramework.createWorkoutView(
+        apiKey: apiKey,
+        isShowKinestex: showKinesteX,
+        companyName: company,
+        userId: userId,
+        workoutName: "Fitness Lite", // Workout title
+        isLoading: ValueNotifier<bool>(false),
+        onMessageReceived: (message) {
+          handleWebViewMessage(message);
+        }
 );
 ```
 
 **Challenge Component**
 
-1. Change `postData`:
-
 ```dart
-const postData = {
-   'key': apiKey,
-   'userId': 'YOUR USER ID',
-   'company': 'YOUR COMPANY NAME',
-   'exercise': 'Squats',
-   'countdown': 100,
-};
-```
-
-2. Change integration option in KinesteXSDK:
-
-```dart
-KinesteXAIFramework.createChallengeView(
-apiKey: 'YOUR API KEY',
-companyName: 'YOUR COMPANY',
-userId: 'YOUR USER ID',
-exercise: 'Squats', // pass the name of the challenge exercise
-countdown: 100, // duration of the challenge in seconds
-isShowKinesTex: showKinesteX,
-isLoading: ValueNotifier<bool>(false),
-onMessageReceived: handleWebViewMessage,
-);
+    KinesteXAIFramework.createChallengeView(
+        apiKey: apiKey,
+        companyName: company,
+        isShowKinestex: showKinesteX,
+        userId: userId,
+        exercise: "Squats", // Exercise title
+        countdown: 100,
+        isLoading: ValueNotifier<bool>(false),
+        onMessageReceived: (message) {
+          handleWebViewMessage(message);
+        }
+    );
 ```
 
 **Camera Component**
 
-1. Change `postData`:
+1. Displaying KinesteXSDK:
 
 ```dart
-const postData = {
-   'key': apiKey,
-   'userId': 'YOUR USER ID',
-   'company': 'YOUR COMPANY NAME',
-   'currentExercise': 'Squats',
-   'exercises': ['Squats', 'Jumping Jack'],
-};
+   ValueListenableBuilder<String?>(
+        valueListenable: updateExercise,
+        builder: (context, value, _) {
+        return KinesteXAIFramework.createCameraComponent(
+        apiKey: apiKey,
+        companyName: company,
+        isShowKinestex: showKinesteX,
+        userId: userId,
+        exercises: ["Squats", "Jumping Jack"],
+        currentExercise: "Squats",
+        updatedExercise: value,
+        isLoading: ValueNotifier<bool>(false),
+        onMessageReceived: (message) {
+        handleWebViewMessage(message);
+        },
+        );
+    }),
 ```
-
-2. Changing current exercise:
+2. Update current exercise by changing the notifier's value:
 
 ```dart
-void changeExercise() {
-   updateExercise.value = 'Jumping Jack';
-}
+ updateExercise.value = 'Jumping Jack';
 ```
-
-3. Displaying KinesteXSDK:
+3. Handle message for reps and mistakes a person has done:
 
 ```dart
-KinesteXAIFramework.createCameraComponent(
-apiKey: 'YOUR API KEY',
-companyName: 'YOUR COMPANY',
-userId: 'YOUR USER ID',
-exercises: ['Squats', 'Jumping Jack'],
-currentExercise: 'Squats',
-isShowKinesTex: showKinesteX,
-isLoading: ValueNotifier<bool>(false),
-onMessageReceived: handleWebViewMessage,
-updatedExercise: updateExercise.value,
-);
+    ValueNotifier<int> reps = ValueNotifier<int>(0);
+    ValueNotifier<String> mistake = ValueNotifier<String>("--");
+    
+    void handleWebViewMessage(WebViewMessage message) {
+      if (message is ExitKinestex) {
+        // Handle ExitKinestex message
+        setState(() {
+          showKinesteX.value = false;
+        });
+      } else if (message is Reps) {
+        setState(() {
+          reps.value = message.data['value'] ?? 0;
+        });
+      } else if (message is Mistake) {
+        setState(() {
+          mistake.value = message.data['value'] ?? '--';
+        });
+      } else {
+        // Handle other message types
+        print("Other message received: ${message.data}");
+      }
+    }
 ```
 
-4. Handle message for reps and mistakes a person has done:
-
-```dart
-void handleWebViewMessage(WebViewMessage message) {
-   switch (message.type) {
-      case 'reps':
-         reps.value = message.data['value'] ?? 0;
-         break;
-      case 'mistake':
-         mistake.value = message.data['value'] ?? '--';
-         break;
-      default:
-         log('Other message: ${message.data}');
-   }
-}
-```
 
 ## Data Points
 

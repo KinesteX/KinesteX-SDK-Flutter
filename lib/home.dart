@@ -25,8 +25,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   String optionType = generateOptions().first.optionType;
   String title = generateOptions().first.title;
 
-  String apiKey = "YOUR ACCESS KEY";
-  String company = "YOUR COMPANY";
+  String apiKey = "your key";
+  String company = "your company";
   String userId = "user1";
 
   ValueNotifier<bool> showKinesteX = ValueNotifier<bool>(false);
@@ -41,18 +41,13 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         showKinesteX.value = false;
       });
     } else if (message is Reps) {
-      final repsData = message.data['value'] as int?;
-      if (repsData != null) {
-        reps.value = repsData;
-        print("Mistake message received with value: $repsData");
-      }
+      setState(() {
+        reps.value = message.data['value'] ?? 0;
+      });
     } else if (message is Mistake) {
-      final mistakeData = message.data['value'] as String?;
-
-      if (mistakeData != null) {
-        mistake.value = mistakeData;
-        print("Mistake message received with value: $mistakeData");
-      }
+      setState(() {
+        mistake.value = message.data['value'] ?? '--';
+      });
     } else {
       // Handle other message types
       print("Other message received: ${message.data}");
@@ -263,7 +258,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     }
   }
 
-
   PlanCategory getPlanCategoryFromString(String category) {
     switch (category.toLowerCase()) {
       case "cardio":
@@ -281,15 +275,15 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     }
   }
 
-
   Widget createMainView() {
     return Center(
       child: KinesteXAIFramework.createMainView(
         apiKey: apiKey,
         companyName: company,
-        isShowKinesTex: showKinesteX,
+        isShowKinestex: showKinesteX,
         userId: userId,
-        planCategory: getPlanCategoryFromString(options[selectIntegration].subOption![selectSubOption]),
+        planCategory: getPlanCategoryFromString(
+            options[selectIntegration].subOption![selectSubOption]),
         isLoading: ValueNotifier<bool>(false),
         onMessageReceived: (message) {
           handleWebViewMessage(message);
@@ -298,14 +292,13 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     );
   }
 
-
   Widget createPlanView() {
     return Center(
       child: KinesteXAIFramework.createPlanView(
           apiKey: apiKey,
           companyName: company,
           userId: userId,
-          isShowKinesTex: showKinesteX,
+          isShowKinestex: showKinesteX,
           planName: options[selectIntegration].subOption![selectSubOption],
           isLoading: ValueNotifier<bool>(false),
           onMessageReceived: (message) {
@@ -318,7 +311,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     return Center(
       child: KinesteXAIFramework.createWorkoutView(
           apiKey: apiKey,
-          isShowKinesTex: showKinesteX,
+          isShowKinestex: showKinesteX,
           companyName: company,
           userId: userId,
           workoutName: options[selectIntegration].subOption![selectSubOption],
@@ -334,9 +327,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       child: KinesteXAIFramework.createChallengeView(
           apiKey: apiKey,
           companyName: company,
-          isShowKinesTex: showKinesteX,
+          isShowKinestex: showKinesteX,
           userId: userId,
-          exercise: options[selectIntegration].subOption![selectSubOption],
+          exercise: "Squats",
           countdown: 100,
           isLoading: ValueNotifier<bool>(false),
           onMessageReceived: (message) {
@@ -355,7 +348,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 return KinesteXAIFramework.createCameraComponent(
                   apiKey: apiKey,
                   companyName: company,
-                  isShowKinesTex: showKinesteX,
+                  isShowKinestex: showKinesteX,
                   userId: userId,
                   exercises: ["Squats", "Jumping Jack"],
                   currentExercise: "Squats",
