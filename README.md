@@ -83,7 +83,7 @@ void _showCameraAccessDeniedAlert() {
 }
 ```
 
-### Integration Options
+## Integration Options
 
 | **functions**             | **Description**                                                 |
 |---------------------------|-----------------------------------------------------------------|
@@ -93,18 +93,12 @@ void _showCameraAccessDeniedAlert() {
 | **createChallengeView**   | Integration of Individual Exercise in a challenge form          |
 | **createCameraComponent** | Integration of our camera component with pose-analysis and feedback |
 
-### Available Categories to Sort Plans
 
-| **Plan Category (key: planCategory)** |
-|---------------------------------------|
-| **Strength**                          |
-| **Cardio**                            |
-| **Weight Management**                 |
-| **Rehabilitation**                    |
+## Integration Steps:
 
-### Example Integration
+1. Identify the Integration Option(s) for your use-case
 
-1. Create a handleMessage function to process messages from KinesteX SDK:
+2. Create a handleMessage function to process messages from KinesteX SDK:
 
 ```dart
  ValueNotifier<bool> showKinesteX = ValueNotifier<bool>(false);
@@ -122,8 +116,19 @@ void handleWebViewMessage(WebViewMessage message) {
 }
 ```
 
-2. Display KinesteX with Main Integration Option:
+3. Customize and display each integration option:
 
+## MAIN Integration Option
+Available Categories to Sort Plans
+
+| **Plan Category (key: planCategory)** |
+|---------------------------------------|
+| **Strength**                          |
+| **Cardio**                            |
+| **Weight Management**                 |
+| **Rehabilitation**                    |
+
+Displaying the main view:
 ```dart
   KinesteXAIFramework.createMainView(
     apiKey: apiKey,
@@ -139,9 +144,7 @@ void handleWebViewMessage(WebViewMessage message) {
 );
 ```
 
-### Examples for Each Integration Option
-
-**Individual Plan**
+## PLAN Integration Option
 
 ```dart
   KinesteXAIFramework.createPlanView(
@@ -149,7 +152,7 @@ void handleWebViewMessage(WebViewMessage message) {
     companyName: company,
     userId: userId,
     isShowKinestex: showKinesteX,
-    planName: "Circuit Training",
+    planName: "Circuit Training", // specify the plan name here
     isLoading: ValueNotifier<bool>(false),
     onMessageReceived: (message) {
       handleWebViewMessage(message);
@@ -157,7 +160,7 @@ void handleWebViewMessage(WebViewMessage message) {
     );
 ```
 
-**Individual Workout**
+## WORKOUT Integration Option
 
 ```dart
   KinesteXAIFramework.createWorkoutView(
@@ -165,7 +168,7 @@ void handleWebViewMessage(WebViewMessage message) {
         isShowKinestex: showKinesteX,
         companyName: company,
         userId: userId,
-        workoutName: "Fitness Lite", // Workout title
+        workoutName: "Fitness Lite", // specify the workout name here
         isLoading: ValueNotifier<bool>(false),
         onMessageReceived: (message) {
           handleWebViewMessage(message);
@@ -173,7 +176,7 @@ void handleWebViewMessage(WebViewMessage message) {
 );
 ```
 
-**Challenge Component**
+## CHALLENGE Integration Option
 
 ```dart
     KinesteXAIFramework.createChallengeView(
@@ -190,7 +193,7 @@ void handleWebViewMessage(WebViewMessage message) {
     );
 ```
 
-**Camera Component**
+## CAMERA Integration Option
 
 1. Displaying KinesteXSDK:
 
