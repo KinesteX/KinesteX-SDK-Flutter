@@ -41,7 +41,7 @@ Add the following dependency to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-   kinestex_sdk_flutter: ^1.1.8
+   kinestex_sdk_flutter: ^1.2.0
    permission_handler: ^11.3.1
 ```
 
