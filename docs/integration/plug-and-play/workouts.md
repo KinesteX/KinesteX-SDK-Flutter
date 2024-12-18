@@ -14,7 +14,7 @@ Quickly add dynamic workout experiences to your app without the complexity of in
 
 ---
 
-## **WORKOUT Integration Example**
+# **WORKOUT Integration Example**
 
 ```dart
 KinesteXAIFramework.createWorkoutView(
@@ -33,7 +33,7 @@ KinesteXAIFramework.createWorkoutView(
 );
 ```
 
-## Next steps:
+# Next steps:
 - [View handleWebViewMessage available data points](../../data.md)
 - [View complete code example](../../examples/workouts.md)
 - [Explore more integration options](../overview.md)
