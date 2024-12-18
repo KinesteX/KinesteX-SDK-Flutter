@@ -156,10 +156,10 @@ packages:
     dependency: "direct main"
     description:
       name: kinestex_sdk_flutter
-      sha256: c175f1caea04ad7d042b6fea5f55a9f448512cb3d73626d19d7baf968b333e53
+      sha256: "169f86a378832959e131c98679884c69c9949c3aa9fd84a7b9c8cb320b2ba2f3"
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.0"
+    version: "1.2.2"
   leak_tracker:
     dependency: transitive
     description:

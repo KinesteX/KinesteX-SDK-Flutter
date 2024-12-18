@@ -20,9 +20,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   String optionType = generateOptions().first.optionType;
   String title = generateOptions().first.title;
 
-  String apiKey = "your_apikey";
+  String apiKey = "your_api_key";
   String company = "your_company";
-  String userId = "user1";
+  String userId = "your_user_id";
 
   ValueNotifier<bool> showKinesteX = ValueNotifier<bool>(false);
   ValueNotifier<int> reps = ValueNotifier<int>(0);
@@ -95,18 +95,13 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             ],
           ),
         )
-            : WillPopScope(
-          onWillPop: () async {
-            return true;
-          },
-          child: Scaffold(
+       : Scaffold(
             backgroundColor: Colors.black,
             body: Padding(
               padding: const EdgeInsets.all(16.0),
               child: initialComponent(),
             ),
-          ),
-        );
+          );
       },
     );
   }
@@ -281,6 +276,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         userId: userId,
         planCategory: getPlanCategoryFromString(
             options[selectIntegration].subOption![selectSubOption]),
+        customParams: {
+          "style": "dark", // light or dark theme (default is dark)
+        },
         isLoading: ValueNotifier<bool>(false),
         onMessageReceived: (message) {
           handleWebViewMessage(message);
@@ -297,6 +295,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           userId: userId,
           isShowKinestex: showKinesteX,
           planName: options[selectIntegration].subOption![selectSubOption],
+          customParams: {
+            "style": "dark", // light or dark theme (default is dark)
+          },
           isLoading: ValueNotifier<bool>(false),
           onMessageReceived: (message) {
             handleWebViewMessage(message);
@@ -312,6 +313,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           companyName: company,
           userId: userId,
           workoutName: options[selectIntegration].subOption![selectSubOption],
+          customParams: {
+            "style": "dark", // light or dark theme (default is dark)
+          },
           isLoading: ValueNotifier<bool>(false),
           onMessageReceived: (message) {
             handleWebViewMessage(message);
@@ -328,6 +332,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           userId: userId,
           exercise: "Squats",
           countdown: 100,
+          customParams: {
+            "style": "dark", // light or dark theme (default is dark)
+          },
           isLoading: ValueNotifier<bool>(false),
           onMessageReceived: (message) {
             handleWebViewMessage(message);
@@ -343,6 +350,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           isShowKinestex: showKinesteX,
           userId: userId,
           experience: "box",
+          customParams: {
+            "style": "dark", // light or dark theme (default is dark)
+          },
           isLoading: ValueNotifier<bool>(false),
           onMessageReceived: (message) {
             handleWebViewMessage(message);
