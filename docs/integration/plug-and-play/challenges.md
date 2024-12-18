@@ -11,7 +11,7 @@ Effortlessly incorporate this feature into your app to deliver dynamic and enjoy
 
 ---
 
-## **CHALLENGE Integration Example**
+# **CHALLENGE Integration Example**
 
 ```dart
 KinesteXAIFramework.createChallengeView(
@@ -31,7 +31,7 @@ KinesteXAIFramework.createChallengeView(
 );
 ```
 
-## Next steps: 
+# Next steps: 
 - [View handleWebViewMessage available data points](../../data.md)
 - [View complete code example](../../examples/challenge.md)
 - [Explore more integration options](../overview.md)
