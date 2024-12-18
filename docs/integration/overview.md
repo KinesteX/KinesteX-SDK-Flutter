@@ -12,23 +12,23 @@
 
 | **Function**             | **Description**                                                       | **Documentation**                                    |
 |---------------------------|-----------------------------------------------------------------------|-----------------------------------------------------|
-| [`createMainView`](./integration/plug-and-play/complete-ux.md)        | Integration of our Complete UX                                        | [View Documentation](./integration/plug-and-play/complete-ux.md)         |
-| [`createPlanView`](./integration/plug-and-play/workout-plans.md)        | Integration of Individual Plan Component                              | [View Documentation](./integration/plug-and-play/workout-plans.md)       |
-| [`createWorkoutView`](./integration/plug-and-play/workouts.md)     | Integration of Individual Workout Component                           | [View Documentation](./integration/plug-and-play/workouts.md)           |
-| [`createChallengeView`](./integration/plug-and-play/challenges.md)   | Integration of Individual Exercise in a challenge form                | [View Documentation](./integration/plug-and-play/challenges.md)         |
-| [`createExperienceView`](./integration/plug-and-play/ai-experiences.md)  | Integration of AI Experience. Please contact support for more details | [View Documentation](./integration/plug-and-play/ai-experiences.md)     |
-| [`createCameraComponent`](./integration/custom/camera.md) | Integration of our camera component with pose-analysis and feedback   | [View Documentation](./integration/custom/camera.md)                    |
+| [`createMainView`](./plug-and-play/complete-ux.md)        | Integration of our Complete UX                                        | [View Documentation](./plug-and-play/complete-ux.md)         |
+| [`createPlanView`](./plug-and-play/workout-plans.md)        | Integration of Individual Plan Component                              | [View Documentation](./plug-and-play/workout-plans.md)       |
+| [`createWorkoutView`](./plug-and-play/workouts.md)     | Integration of Individual Workout Component                           | [View Documentation](./plug-and-play/workouts.md)           |
+| [`createChallengeView`](./plug-and-play/challenges.md)   | Integration of Individual Exercise in a challenge form                | [View Documentation](./plug-and-play/challenges.md)         |
+| [`createExperienceView`](./plug-and-play/ai-experiences.md)  | Integration of AI Experience. Please contact support for more details | [View Documentation](./plug-and-play/ai-experiences.md)     |
+| [`createCameraComponent`](./custom/camera.md) | Integration of our camera component with pose-analysis and feedback   | [View Documentation](./custom/camera.md)                    |
 
 ---
 
 # Quick Start Guides
 
 ### Plug-and-play Solutions:
-- [Complete UX View](./integration/plug-and-play/complete-ux.md)
-- [Workout Plans](./integration/plug-and-play/workout-plans.md)
-- [Workouts](./integration/plug-and-play/workouts.md)
-- [Challenges](./integration/plug-and-play/challenges.md)
-- [Gamified AI Experiences](./integration/plug-and-play/ai-experiences.md)
+- [Complete UX View](./plug-and-play/complete-ux.md)
+- [Workout Plans](./plug-and-play/workout-plans.md)
+- [Workouts](./plug-and-play/workouts.md)
+- [Challenges](./plug-and-play/challenges.md)
+- [Gamified AI Experiences](./plug-and-play/ai-experiences.md)
   
 ### Custom Solutions: 
-- [Camera Component](./integration/custom/camera.md)
+- [Camera Component](./custom/camera.md)
