@@ -17,7 +17,7 @@ Easily integrate our solution into your system. With quick setup and seamless on
 
 ---
 
-## **PLAN Integration Example**
+# **PLAN Integration Example**
 
 ```dart
 KinesteXAIFramework.createPlanView(
@@ -36,7 +36,7 @@ KinesteXAIFramework.createPlanView(
 );
 ``` 
 
-## Next steps:
+# Next steps:
 - [View handleWebViewMessage available data points](../../data.md)
 - [View complete code example](../../examples/plans.md)
 - [Explore more integration options](../overview.md)
