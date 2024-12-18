@@ -1,4 +1,6 @@
 ## Available Integration Options
+![image](https://github.com/user-attachments/assets/bff1ce3a-8124-4251-8699-def8fb46ebe6)
+
 
 ### Integration Options
 
@@ -20,12 +22,14 @@
 
 ---
 
-## Next Steps
+# Next Steps
 Plug-and-play:
 - [Complete UX View](./plug-and-play/complete-ux.md)
 - [Workout Plans](./plug-and-play/workout-plans.md)
 - [Workouts](./plug-and-play/workouts.md)
 - [Challenges](./plug-and-play/challenges.md)
 - [Gamified AI Experiences](./plug-and-play/ai-experiences.md)
+
+  
 Custom UX with Motion Analysis: 
 - [Camera Component](./custom/motion-analysis-component.md)
