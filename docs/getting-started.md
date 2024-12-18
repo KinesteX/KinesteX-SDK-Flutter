@@ -110,6 +110,6 @@ void handleWebViewMessage(WebViewMessage message) {
 }
  ```
 # Next Steps
-- [Available Integration Options](integration/overview.md)
+**[Available Integration Options](integration/overview.md)**
 
 
