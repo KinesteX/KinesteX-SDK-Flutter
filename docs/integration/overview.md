@@ -17,7 +17,7 @@
 | [`createWorkoutView`](./plug-and-play/workouts.md)     | Integration of Individual Workout Component                           | [View Documentation](./plug-and-play/workouts.md)           |
 | [`createChallengeView`](./plug-and-play/challenges.md)   | Integration of Individual Exercise in a challenge form                | [View Documentation](./plug-and-play/challenges.md)         |
 | [`createExperienceView`](./plug-and-play/ai-experiences.md)  | Integration of AI Experience. Please contact support for more details | [View Documentation](./plug-and-play/ai-experiences.md)     |
-| [`createCameraComponent`](./custom/camera.md) | Integration of our camera component with pose-analysis and feedback   | [View Documentation](./custom/camera.md)                    |
+| [`createCameraComponent`](./custom/motion-analysis-component.md) | Integration of our camera component with pose-analysis and feedback   | [View Documentation](./custom/motion-analysis-component.md)                    |
 
 ---
 
@@ -31,4 +31,4 @@
 - [Gamified AI Experiences](./plug-and-play/ai-experiences.md)
   
 ### Custom Solutions: 
-- [Camera Component](./custom/camera.md)
+- [Motion Analysis](./custom/motion-analysis-component.md)
