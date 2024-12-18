@@ -35,5 +35,5 @@ KinesteXAIFramework.createWorkoutView(
 
 ## Next steps:
 - [View handleWebViewMessage available data points](../../data.md)
-- [View complete code example challenge](../../examples/workouts.md)
+- [View complete code example](../../examples/workouts.md)
 - [Explore more integration options](../overview.md)

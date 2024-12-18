@@ -33,5 +33,5 @@ KinesteXAIFramework.createChallengeView(
 
 ## Next steps: 
 - [View handleWebViewMessage available data points](../../data.md)
-- [View complete code example challenge](../../examples/challenge.md)
+- [View complete code example](../../examples/challenge.md)
 - [Explore more integration options](../overview.md)

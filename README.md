@@ -1,11 +1,13 @@
 # [Precise Motion Tracking and Analysis SDK](https://kinestex.com)
 ## Stay Ahead with KinesteX AI Motion Tracking and Analysis.
 
-Welcome to KinesteX SDK documentation. Choose your path:
+Welcome to KinesteX SDK documentation.
 
-🚀 [Quick Start](docs/getting-started.md)
-📱 [Integration Options](docs/integration/overview.md)
-💡 [Examples](docs/examples/code-samples.md)
+### **Choose Your Path:**
+
+1. **🚀 [Quick Start](docs/getting-started.md)**  
+2. **📱 [Integration Options](docs/integration/overview.md)**  
+3. **💡 [Examples](docs/examples/code-samples.md)**
 
 ## What is KinesteX?
 
