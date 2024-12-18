@@ -13,7 +13,7 @@ This experience features a **virtual dynamic punching bag** that reacts to every
 
 ---
 
-## **EXPERIENCE Integration Example**
+# **EXPERIENCE Integration Example**
 
 ```dart
 KinesteXAIFramework.createExperienceView(
@@ -32,7 +32,7 @@ KinesteXAIFramework.createExperienceView(
 );
 ```
 
-## Next steps:
+# Next steps:
 - [View handleWebViewMessage available data points](../../data.md)
 - [View complete code example](../../examples/ai-experiences.md)
 - [Explore more integration options](../overview.md)
