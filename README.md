@@ -1,9 +1,7 @@
 # [Precise Motion Tracking and Analysis SDK](https://kinestex.com)
 #### Stay Ahead with KinesteX AI Motion Tracking and Analysis.
 
-Welcome to KinesteX SDK documentation.
-
-# **Quick Menu:**
+# **Contents:**
 
 1. **🚀 [Quick Start](docs/getting-started.md)**  
 2. **📱 [Integration Options](docs/integration/overview.md)**  
@@ -13,7 +11,7 @@ Welcome to KinesteX SDK documentation.
 
 ### What is KinesteX?
 
-KinesteX provides digital health apps with plug-and-play and custom AI motion analysis for next-gen experiences in health, safety, and fitness movement training.
+KinesteX provides plug-and-play and custom AI motion analysis SDK for next-gen experiences in health, safety, and fitness movement training.
 
 ### Key Features
 
