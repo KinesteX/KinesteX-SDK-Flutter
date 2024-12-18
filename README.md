@@ -3,7 +3,7 @@
 
 Welcome to KinesteX SDK documentation.
 
-# **Choose Your Path:**
+# **Quick Menu:**
 
 1. **🚀 [Quick Start](docs/getting-started.md)**  
 2. **📱 [Integration Options](docs/integration/overview.md)**  
