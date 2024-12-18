@@ -1,4 +1,4 @@
-## Minimum Device Requirements: 
+### Minimum Device Requirements: 
 - Android: Android 8.0 (API level 26) or higher
 - iOS: iOS 14.0 or higher
 
@@ -109,7 +109,7 @@ void handleWebViewMessage(WebViewMessage message) {
   }
 }
  ```
-## Next Steps
+# Next Steps
 - [Available Integration Options](integration/overview.md)
 
 
