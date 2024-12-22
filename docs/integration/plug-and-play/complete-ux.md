@@ -33,6 +33,6 @@ With this integration option we displays 3 best workout plans based on the provi
   }
 ```
 # Next steps:
-- [View handleWebViewMessage available data points](../../data.md)
-- [View complete code example](../../examples/complete-ux.md)
-- [Explore more integration options](../overview.md)
+- ### [View handleWebViewMessage available data points](../../data.md)
+- ### [View complete code example](../../examples/complete-ux.md)
+- ### [Explore more integration options](../overview.md)
