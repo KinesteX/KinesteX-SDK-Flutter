@@ -5,7 +5,7 @@
 
 1. ### **🚀 [Quick Start](docs/getting-started.md)**
 2. ### **📱 [Integration Options](docs/integration/overview.md)**
-3. ### **📋 [Data points](docs/integration/overview.md)**
+3. ### **📋 [Data points](docs/data.md)**
 4. ### **💡 [Examples](docs/examples/code-samples.md)**
 5. ### **📧 [Contact us](#need-help)**
 
