@@ -8,7 +8,7 @@
 
 #### AndroidManifest.xml
 
-Add the following permissions for camera and microphone usage:
+Add the following permissions for camera usage:
 
 ```xml
 <!-- Add this line inside the <manifest> tag -->
@@ -19,7 +19,7 @@ Add the following permissions for camera and microphone usage:
 
 #### Info.plist
 
-Add the following keys for camera and microphone usage:
+Add the following keys for camera usage:
 
 ```xml
 <key>NSCameraUsageDescription</key>
