@@ -12,7 +12,7 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
+class _MyHomePageState extends State<MyHomePage> {
   int selectIntegration = 0;
   List<IntegrationOption> options = generateOptions();
   List<String> subOption = generateOptions().first.subOption ?? [];
@@ -21,7 +21,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   String title = generateOptions().first.title;
 
   String apiKey = "your_api_key";
-  String company = "your_company";
+  String company = "your_company_name";
   String userId = "your_user_id";
 
   ValueNotifier<bool> showKinesteX = ValueNotifier<bool>(false);

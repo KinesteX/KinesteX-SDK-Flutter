@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:kinestex_sdk_flutter/models/kinestex_view_state.dart';
-
-import 'package:provider/provider.dart';
 import 'home.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => KinesteXViewState(),
-      child: const MyApp(),
+    const MaterialApp(
+      home: MyHomePage(),
     ),
   );
 }
