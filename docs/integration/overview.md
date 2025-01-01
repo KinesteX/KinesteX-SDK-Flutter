@@ -9,6 +9,7 @@
 | [`createPlanView`](./plug-and-play/workout-plans.md)        | Integration of Individual Plan Component                              | [View Documentation](./plug-and-play/workout-plans.md)       |
 | [`createWorkoutView`](./plug-and-play/workouts.md)     | Integration of Individual Workout Component                           | [View Documentation](./plug-and-play/workouts.md)           |
 | [`createChallengeView`](./plug-and-play/challenges.md)   | Integration of Individual Exercise in a challenge form                | [View Documentation](./plug-and-play/challenges.md)         |
+| [`createLeaderboardView`](./plug-and-play/leaderboard.md)   | Leaderboard for challenges              | [View Documentation](./plug-and-play/leaderboard.md)         |
 | [`createExperienceView`](./plug-and-play/ai-experiences.md)  | Integration of AI Experience. Please contact support for more details | [View Documentation](./plug-and-play/ai-experiences.md)     |
 | [`createCameraComponent`](./custom/motion-analysis-component.md) | Integration of our camera component with pose-analysis and feedback   | [View Documentation](./custom/motion-analysis-component.md)                    |
 
@@ -28,6 +29,7 @@
 - [Workout Plans](./plug-and-play/workout-plans.md)
 - [Workouts](./plug-and-play/workouts.md)
 - [Challenges](./plug-and-play/challenges.md)
+- [Leaderboard](./plug-and-play/leaderboard.md)
 - [Gamified AI Experiences](./plug-and-play/ai-experiences.md)
   
 ### Custom Solutions: 
