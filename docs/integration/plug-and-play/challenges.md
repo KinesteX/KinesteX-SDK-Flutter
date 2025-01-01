@@ -21,6 +21,7 @@ KinesteXAIFramework.createChallengeView(
   userId: userId, // Unique identifier for the user
   exercise: "Squats", // Specify the exercise title
   countdown: 100, // Countdown timer in seconds
+  showLeaderboard: true, // show Leaderboard at the end of the challenge (default true)
   customParams: {
     "style": "dark", // light or dark theme (default is dark)
   },
@@ -33,5 +34,6 @@ KinesteXAIFramework.createChallengeView(
 
 # Next steps: 
 - ### [View handleWebViewMessage available data points](../../data.md)
+- ### [Show Leaderboard Fullscreen](./leaderboard.md)
 - ### [View complete code example](../../examples/challenge.md)
 - ### [Explore more integration options](../overview.md)
