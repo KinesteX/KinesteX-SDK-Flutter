@@ -245,6 +245,8 @@ class _MyHomePageState extends State<MyHomePage> {
         return createChallengeView();
       case 4:
         return createExperienceView();
+      case 5:
+        return createLeaderboardView();
       default:
         return createCameraComponent();
     }
@@ -332,6 +334,23 @@ class _MyHomePageState extends State<MyHomePage> {
           userId: userId,
           exercise: "Squats",
           countdown: 100,
+          customParams: {
+            "style": "dark", // light or dark theme (default is dark)
+          },
+          isLoading: ValueNotifier<bool>(false),
+          onMessageReceived: (message) {
+            handleWebViewMessage(message);
+          }),
+    );
+  }
+  Widget createLeaderboardView() {
+    return Center(
+      child: KinesteXAIFramework.createLeaderboardView(
+          apiKey: apiKey,
+          companyName: company,
+          isShowKinestex: showKinesteX,
+          userId: userId,
+          exercise: "Squats",
           customParams: {
             "style": "dark", // light or dark theme (default is dark)
           },

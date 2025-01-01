@@ -24,6 +24,11 @@ enum IntegrationOptionType {
     category: 'Experience',
     subOptions: ['Box'],
   ),
+  LEADERBOARD(
+    title: 'Leaderboard',
+    category: '',
+    subOptions: [],
+  ),
   CAMERA(
     title: 'Camera',
     category: '',
