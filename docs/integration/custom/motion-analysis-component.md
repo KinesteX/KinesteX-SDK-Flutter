@@ -82,7 +82,7 @@ void handleWebViewMessage(WebViewMessage message) {
 }
 ```
 
-## Additional customization options you can pass in customParameters: 
+## Additional customization options you can pass in customParams: 
 | Field | Description |
 |-------|-------------|
 | `videoURL` | If videoURL is specified, we will use it instead of camera |
