@@ -3,15 +3,16 @@
 
 ### Available Functions
 
-| **Function**             | **Description**                                                       | **Documentation**                                    |
-|---------------------------|-----------------------------------------------------------------------|-----------------------------------------------------|
-| [`createMainView`](./plug-and-play/complete-ux.md)        | Integration of our Complete UX                                        | [View Documentation](./plug-and-play/complete-ux.md)         |
-| [`createPlanView`](./plug-and-play/workout-plans.md)        | Integration of Individual Plan Component                              | [View Documentation](./plug-and-play/workout-plans.md)       |
-| [`createWorkoutView`](./plug-and-play/workouts.md)     | Integration of Individual Workout Component                           | [View Documentation](./plug-and-play/workouts.md)           |
-| [`createChallengeView`](./plug-and-play/challenges.md)   | Integration of Individual Exercise in a challenge form                | [View Documentation](./plug-and-play/challenges.md)         |
-| [`createLeaderboardView`](./plug-and-play/leaderboard.md)   | Leaderboard for challenges              | [View Documentation](./plug-and-play/leaderboard.md)         |
-| [`createExperienceView`](./plug-and-play/ai-experiences.md)  | Integration of AI Experience. Please contact support for more details | [View Documentation](./plug-and-play/ai-experiences.md)     |
-| [`createCameraComponent`](./custom/motion-analysis-component.md) | Integration of our camera component with pose-analysis and feedback   | [View Documentation](./custom/motion-analysis-component.md)                    |
+| **Function**                                                                | **Description**                                                       | **Documentation**                                           |
+|-----------------------------------------------------------------------------|-----------------------------------------------------------------------|-------------------------------------------------------------|
+| [`createMainView`](./plug-and-play/complete-ux.md)                          | Integration of our Complete UX                                        | [View Documentation](./plug-and-play/complete-ux.md)        |
+| [`createPlanView`](./plug-and-play/workout-plans.md)                        | Integration of Individual Plan Component                              | [View Documentation](./plug-and-play/workout-plans.md)      |
+| [`createWorkoutView`](./plug-and-play/workouts.md)                          | Integration of Individual Workout Component                           | [View Documentation](./plug-and-play/workouts.md)           |
+| [`createChallengeView`](./plug-and-play/challenges.md)                      | Integration of Individual Exercise in a challenge form                | [View Documentation](./plug-and-play/challenges.md)         |
+| [`createLeaderboardView`](./plug-and-play/leaderboard.md)                   | Leaderboard for challenges              | [View Documentation](./plug-and-play/leaderboard.md)        |
+| [`createExperienceView`](./plug-and-play/ai-experiences.md)                 | Integration of AI Experience. Please contact support for more details | [View Documentation](./plug-and-play/ai-experiences.md)     |
+| [`(Beta) createPersonalizedPlanView`](./plug-and-play/personalized-plan.md) | Displays Personalized AI Plan depending on user's biometrics and assessment results. Please contact support for more details| [View Documentation](./plug-and-play/personalized-plan.md)  |
+| [`createCameraComponent`](./custom/motion-analysis-component.md)            | Integration of our camera component with pose-analysis and feedback   | [View Documentation](./custom/motion-analysis-component.md) |
 
 ---
 
@@ -31,6 +32,7 @@
 - [Challenges](./plug-and-play/challenges.md)
 - [Leaderboard](./plug-and-play/leaderboard.md)
 - [Gamified AI Experiences](./plug-and-play/ai-experiences.md)
-  
+- [Personalized AI Plan](./plug-and-play/personalized-plan.md)
+
 ### Custom Solutions: 
 - [Motion Analysis](./custom/motion-analysis-component.md)
