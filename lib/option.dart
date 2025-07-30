@@ -29,6 +29,11 @@ enum IntegrationOptionType {
     category: '',
     subOptions: [],
   ),
+  PERSONALIZED_PLAN(
+  title: '(Beta) Personalized Plan',
+  category: '(Beta) Personalized Plan',
+  subOptions: [],
+  ),
   CAMERA(
     title: 'Camera',
     category: '',

@@ -247,6 +247,8 @@ class _MyHomePageState extends State<MyHomePage> {
         return createExperienceView();
       case 5:
         return createLeaderboardView();
+      case 6:
+        return createPersonalizedPlanView();
       default:
         return createCameraComponent();
     }
@@ -332,7 +334,7 @@ class _MyHomePageState extends State<MyHomePage> {
           companyName: company,
           isShowKinestex: showKinesteX,
           userId: userId,
-          exercise: "Squats",
+          exercise: "jz73VFlUyZ9nyd64OjRb",
           countdown: 100,
           customParams: {
             "style": "dark", // light or dark theme (default is dark)
@@ -379,6 +381,24 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  Widget createPersonalizedPlanView() {
+    return Center(
+      child: KinesteXAIFramework.createPersonalizedPlanView(
+          apiKey: apiKey,
+          companyName: company,
+          isShowKinestex: showKinesteX,
+          userId: userId,
+          customParams: {
+            "style": "dark", // light or dark theme (default is dark)
+          },
+          isLoading: ValueNotifier<bool>(false),
+          onMessageReceived: (message) {
+            handleWebViewMessage(message);
+          }),
+    );
+  }
+
+
   Widget createCameraComponent() {
     return Stack(
       children: [
@@ -393,6 +413,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   userId: userId,
                   exercises: ["Squats", "Jumping Jack"],
                   currentExercise: "Squats",
+                  customParams: {
+                    "minPoseDetectionConfidence": 0.5,
+                    "minTrackingConfidence": 0.8,
+                    "minPosePresenceConfidence": 0.5,
+                  },
                   updatedExercise: value,
                   isLoading: ValueNotifier<bool>(false),
                   onMessageReceived: (message) {
