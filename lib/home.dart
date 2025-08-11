@@ -249,6 +249,8 @@ class _MyHomePageState extends State<MyHomePage> {
         return createLeaderboardView();
       case 6:
         return createPersonalizedPlanView();
+      case 7:
+        return createWorkoutEditorView();
       default:
         return createCameraComponent();
     }
@@ -388,6 +390,24 @@ class _MyHomePageState extends State<MyHomePage> {
           companyName: company,
           isShowKinestex: showKinesteX,
           userId: userId,
+          customParams: {
+            "style": "dark", // light or dark theme (default is dark)
+          },
+          isLoading: ValueNotifier<bool>(false),
+          onMessageReceived: (message) {
+            handleWebViewMessage(message);
+          }),
+    );
+  }
+
+  Widget createWorkoutEditorView() {
+    return Center(
+      child: KinesteXAIFramework.createAdminWorkoutEditor(
+          apiKey: apiKey,
+          companyName: company,
+          userId: userId,
+          organization: "your_organization_name",
+          isShowKinestex: showKinesteX,
           customParams: {
             "style": "dark", // light or dark theme (default is dark)
           },

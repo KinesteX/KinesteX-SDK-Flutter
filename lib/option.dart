@@ -34,6 +34,11 @@ enum IntegrationOptionType {
   category: '(Beta) Personalized Plan',
   subOptions: [],
   ),
+  ADMIN_WORKOUT_EDITOR(
+    title: 'Workout Editor',
+    category: 'Workout Editor',
+    subOptions: [],
+  ),
   CAMERA(
     title: 'Camera',
     category: '',
