@@ -17,10 +17,7 @@ This experience features a **virtual dynamic punching bag** that reacts to every
 
 ```dart
 KinesteXAIFramework.createExperienceView(
-  apiKey: apiKey, // Your unique API key
-  companyName: company, // Name of your company
   isShowKinestex: showKinesteX, // Boolean to show KinesteX branding
-  userId: userId, // Unique identifier for the user
   experience: "box", // Specify the experience (e.g., "box")
   customParams: {
     "style": "dark", // light or dark theme (default is dark)

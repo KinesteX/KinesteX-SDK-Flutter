@@ -31,10 +31,7 @@ ValueListenableBuilder<String?>(
   valueListenable: updateExercise,
   builder: (context, value, _) {
     return KinesteXAIFramework.createCameraComponent(
-      apiKey: apiKey, // Your unique API key
-      companyName: company, // Name of your company
       isShowKinestex: showKinesteX, // Boolean to show KinesteX branding
-      userId: userId, // Unique identifier for the user
       exercises: ["Squats", "Lunges"], // List of exercises
       currentExercise: "Squats", // Current exercise being tracked
       updatedExercise: value, // Dynamic exercise updates

@@ -15,10 +15,7 @@ Effortlessly incorporate this feature into your app to deliver dynamic and enjoy
 
 ```dart
 KinesteXAIFramework.createChallengeView(
-  apiKey: apiKey, // Your unique API key
-  companyName: company, // Name of your company
   isShowKinestex: showKinesteX, // Boolean to show KinesteX branding
-  userId: userId, // Unique identifier for the user
   exercise: "Squats", // Specify the exercise id or title
   countdown: 100, // Countdown timer in seconds
   showLeaderboard: true, // show Leaderboard at the end of the challenge (default true)

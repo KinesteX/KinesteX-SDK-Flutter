@@ -10,9 +10,6 @@ This example shows how to create the admin workout editor view in your applicati
 
 ```dart
 KinesteXAIFramework.createAdminWorkoutEditor(
-  apiKey: apiKey,
-  companyName: company,
-  userId: userId,
   // Use an organization name to differentiate between different orgs.
   // If you don't plan to use multiple orgs, you can use your company name.
   organization: "your_organization_name",

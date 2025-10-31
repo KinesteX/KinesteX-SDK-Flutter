@@ -15,9 +15,6 @@ Easily integrate our solution into your system. With quick setup and seamless on
 
 ```dart
 KinesteXAIFramework.createPersonalizedPlanView(
-  apiKey: apiKey, // Your unique API key
-  companyName: company, // Name of your company
-  userId: userId, // Unique identifier for the user
   isShowKinestex: showKinesteX, // Boolean to show KinesteX branding
   customParams: {
     "style": "dark", // light or dark theme (default is dark)

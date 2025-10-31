@@ -21,9 +21,6 @@ Easily integrate our solution into your system. With quick setup and seamless on
 
 ```dart
 KinesteXAIFramework.createPlanView(
-  apiKey: apiKey, // Your unique API key
-  companyName: company, // Name of your company
-  userId: userId, // Unique identifier for the user
   isShowKinestex: showKinesteX, // Boolean to show KinesteX branding
   planName: "Circuit Training", // Specify the plan name here
   customParams: {
