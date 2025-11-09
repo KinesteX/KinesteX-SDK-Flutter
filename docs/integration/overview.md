@@ -1,20 +1,28 @@
 ## Available Integration Options
 ![image](https://github.com/user-attachments/assets/bff1ce3a-8124-4251-8699-def8fb46ebe6)
 
-### Available Functions
+## Plug-and-Play Solutions:
 
 | **Function**                                                                | **Description**                                                       | **Documentation**                                           |
 |-----------------------------------------------------------------------------|-----------------------------------------------------------------------|-------------------------------------------------------------|
-| [`createMainView`](./plug-and-play/complete-ux.md)                          | Integration of our Complete UX                                        | [View Documentation](./plug-and-play/complete-ux.md)        |
-| [`createPlanView`](./plug-and-play/workout-plans.md)                        | Integration of Individual Plan Component                              | [View Documentation](./plug-and-play/workout-plans.md)      |
-| [`createWorkoutView`](./plug-and-play/workouts.md)                          | Integration of Individual Workout Component                           | [View Documentation](./plug-and-play/workouts.md)           |
-| [`createChallengeView`](./plug-and-play/challenges.md)                      | Integration of Individual Exercise in a challenge form                | [View Documentation](./plug-and-play/challenges.md)         |
-| [`createLeaderboardView`](./plug-and-play/leaderboard.md)                   | Leaderboard for challenges              | [View Documentation](./plug-and-play/leaderboard.md)        |
-| [`createExperienceView`](./plug-and-play/ai-experiences.md)                 | Integration of AI Experience. Please contact support for more details | [View Documentation](./plug-and-play/ai-experiences.md)     |
-| [`(Beta) createPersonalizedPlanView`](./plug-and-play/personalized-plan.md) | Displays Personalized AI Plan depending on user's biometrics and assessment results. Please contact support for more details| [View Documentation](./plug-and-play/personalized-plan.md)  |
-| [`createCameraComponent`](./custom/motion-analysis-component.md)            | Integration of our camera component with pose-analysis and feedback   | [View Documentation](./custom/motion-analysis-component.md) |
+| [`createMainView`](./plug-and-play/complete-ux.md)                          | Displays 3 workout plans for user to select based on category                                        | [View Documentation](./plug-and-play/complete-ux.md)        |
+| [`createPlanView`](./plug-and-play/workout-plans.md)                        | Displays Individual Plan Component                              | [View Documentation](./plug-and-play/workout-plans.md)      |
+| [`createWorkoutView`](./plug-and-play/workouts.md)                          | Displays Individual Workout Component                           | [View Documentation](./plug-and-play/workouts.md)           |
+| [`createChallengeView`](./plug-and-play/challenges.md)                      | Displays Individual Exercise in a challenge form                | [View Documentation](./plug-and-play/challenges.md)         |
+| [`createLeaderboardView`](./plug-and-play/leaderboard.md)                   | Displays Real-time leaderboard for one challenge exercise              | [View Documentation](./plug-and-play/leaderboard.md)        |
+| [`createExperienceView`](./plug-and-play/ai-experiences.md)                 | Displays AI Experience. Please contact support for more details | [View Documentation](./plug-and-play/ai-experiences.md)     |
+| [`createPersonalizedPlanView (Beta)`](./plug-and-play/personalized-plan.md) | Displays Personalized AI Plan depending on user's biometrics and assessment results. Please contact support for more details| [View Documentation](./plug-and-play/personalized-plan.md)  |
+
+## Create Custom AI Experiences:
+
+| **Function**                                                                | **Description**                                                       | **Documentation**                                           |
+|-----------------------------------------------------------------------------|-----------------------------------------------------------------------|-------------------------------------------------------------|
+| [`fetchContent`](./custom/content-api.md)                                   | Fetch workout, exercise, and plan data easily through API       | [View Documentation](./custom/content-api.md)              |
+| [`createCameraComponent`](./custom/motion-analysis-component.md)            | Integrate our camera component with pose-analysis and feedback   | [View Documentation](./custom/motion-analysis-component.md) |
 
 ---
+
+## Learn More
 
 | **Integration Option**         | **Description**                                                                                                 | **Features**                                                                                                                                                                          | **Details**                                                                                                             |
 |--------------------------------|-----------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
@@ -25,7 +33,7 @@
 
 # Quick Start Guides
 
-### Plug-and-play Solutions:
+### Plug-and-Play Solutions:
 - [Complete UX View](./plug-and-play/complete-ux.md)
 - [Workout Plans](./plug-and-play/workout-plans.md)
 - [Workouts](./plug-and-play/workouts.md)
@@ -34,5 +42,6 @@
 - [Gamified AI Experiences](./plug-and-play/ai-experiences.md)
 - [Personalized AI Plan](./plug-and-play/personalized-plan.md)
 
-### Custom Solutions: 
-- [Motion Analysis](./custom/motion-analysis-component.md)
+### Custom AI Experiences:
+- [Content API - Fetch Workouts, Plans & Exercises](./custom/content-api.md)
+- [Motion Analysis Component](./custom/motion-analysis-component.md)
