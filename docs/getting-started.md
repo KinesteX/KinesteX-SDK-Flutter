@@ -96,8 +96,24 @@ void _showCameraAccessDeniedAlert() {
    );
 }
 ```
+### 4. Initialize KinesteX on app launch for warm up: 
+```
+// main.dart or your app launcher file
+Future<void> main() async {
+  await KinesteXAIFramework.initialize(
+    apiKey: YOUR_API_KEY, // get it from KinesteX admin dashboard 
+    companyName: YOUR_COMPANY_NAME, // get it from KinesteX admin dashboard 
+    userId: YOUR_USER_ID, // any unique string you use to identify users
+  );
 
-### 4. Setup recommendations
+    runApp(
+    const MaterialApp(
+      home: MyHomePage(),
+    ),
+  );
+}
+```
+### 5. Setup recommendations
 1. Add a ValueNotifier value to manage the presentation of KinesteX: `ValueNotifier<bool> showKinesteX = ValueNotifier<bool>(false);`.   
 2. Import KinesteX Module: `import 'package:kinestex_sdk_flutter/kinestex_sdk_flutter.dart';`.
 3. Add a function to handle data from a callback function: 
