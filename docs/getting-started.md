@@ -97,7 +97,7 @@ void _showCameraAccessDeniedAlert() {
 }
 ```
 ### 4. Initialize KinesteX on app launch for warm up: 
-```
+```dart
 // main.dart or your app launcher file
 Future<void> main() async {
   await KinesteXAIFramework.initialize(
