@@ -113,7 +113,16 @@ Future<void> main() async {
   );
 }
 ```
-### 5. Setup recommendations
+
+### 5. Deinitialize KinesteX on app closure `dispose`
+```dart
+  @override
+  void dispose() {
+    disposeKinesteXAIFramework();
+    super.dispose();
+  }
+```
+### 6. Setup recommendations
 1. Add a ValueNotifier value to manage the presentation of KinesteX: `ValueNotifier<bool> showKinesteX = ValueNotifier<bool>(false);`.   
 2. Import KinesteX Module: `import 'package:kinestex_sdk_flutter/kinestex_sdk_flutter.dart';`.
 3. Add a function to handle data from a callback function: 
