@@ -12,10 +12,7 @@ Whenever a new ranking is available, the leaderboard automatically refreshes to 
 
 ```dart
 KinesteXAIFramework.createLeaderboardView(
-  apiKey: apiKey, // Your unique API key
-  companyName: company, // Name of your company
   isShowKinestex: showKinesteX, // Boolean to show KinesteX branding
-  userId: userId, // Unique identifier for the user
   exercise: "Squats", // Specify the exercise title
   username: "", // if you know the username a person has entered: you can highlight the user by specifying their username
   customParams: {

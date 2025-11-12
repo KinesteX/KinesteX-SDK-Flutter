@@ -20,10 +20,6 @@ class _MyHomePageState extends State<MyHomePage> {
   String optionType = generateOptions().first.optionType;
   String title = generateOptions().first.title;
 
-  String apiKey = "your_api_key";
-  String company = "your_company_name";
-  String userId = "your_user_id";
-
   ValueNotifier<bool> showKinesteX = ValueNotifier<bool>(false);
   ValueNotifier<int> reps = ValueNotifier<int>(0);
   ValueNotifier<String> mistake = ValueNotifier<String>("--");
@@ -89,19 +85,19 @@ class _MyHomePageState extends State<MyHomePage> {
       builder: (context, isshowKinesteX, child) {
         return isshowKinesteX
             ? SafeArea(
-          child: Stack(
-            children: [
-              kinestexView(), // Display the appropriate KinesteX view
-            ],
-          ),
-        )
-       : Scaffold(
-            backgroundColor: Colors.black,
-            body: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: initialComponent(),
-            ),
-          );
+                child: Stack(
+                  children: [
+                    kinestexView(), // Display the appropriate KinesteX view
+                  ],
+                ),
+              )
+            : Scaffold(
+                backgroundColor: Colors.black,
+                body: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: initialComponent(),
+                ),
+              );
       },
     );
   }
@@ -163,47 +159,47 @@ class _MyHomePageState extends State<MyHomePage> {
       subOption.isEmpty
           ? const SizedBox()
           : Expandable(
-        firstChild: Padding(
-          padding:
-          const EdgeInsets.symmetric(vertical: 20.0, horizontal: 16),
-          child: Container(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Select $optionType',
-              style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
+              firstChild: Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20.0, horizontal: 16),
+                child: Container(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Select $optionType',
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+              secondChild: Padding(
+                padding: const EdgeInsets.only(left: 16, right: 5),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  padding: EdgeInsets.zero,
+                  itemCount: subOption.length,
+                  itemBuilder: (context, index) {
+                    return containerSubOption(context, index, subOption[index],
+                        () {
+                      setState(() {
+                        selectSubOption = index;
+                      });
+                    }, (value) {
+                      setState(() {
+                        selectSubOption = index;
+                      });
+                    });
+                  },
+                ),
+              ),
+              boxShadow: const [],
+              backgroundColor: const Color.fromARGB(255, 48, 48, 48),
+              borderRadius: BorderRadius.circular(12),
+              centralizeFirstChild: true,
+              arrowWidget:
+                  const Icon(CupertinoIcons.chevron_up, color: Colors.grey),
             ),
-          ),
-        ),
-        secondChild: Padding(
-          padding: const EdgeInsets.only(left: 16, right: 5),
-          child: ListView.builder(
-            shrinkWrap: true,
-            padding: EdgeInsets.zero,
-            itemCount: subOption.length,
-            itemBuilder: (context, index) {
-              return containerSubOption(context, index, subOption[index],
-                      () {
-                    setState(() {
-                      selectSubOption = index;
-                    });
-                  }, (value) {
-                    setState(() {
-                      selectSubOption = index;
-                    });
-                  });
-            },
-          ),
-        ),
-        boxShadow: const [],
-        backgroundColor: const Color.fromARGB(255, 48, 48, 48),
-        borderRadius: BorderRadius.circular(12),
-        centralizeFirstChild: true,
-        arrowWidget:
-        const Icon(CupertinoIcons.chevron_up, color: Colors.grey),
-      ),
       const Spacer(),
       ElevatedButton(
         child: Text(
@@ -219,7 +215,7 @@ class _MyHomePageState extends State<MyHomePage> {
           backgroundColor: Colors.green,
           minimumSize: Size(sizeWidth * 92, 0),
           shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           textStyle: const TextStyle(
               color: Colors.white,
               fontSize: 20,
@@ -276,10 +272,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget createMainView() {
     return Center(
       child: KinesteXAIFramework.createMainView(
-        apiKey: apiKey,
-        companyName: company,
         isShowKinestex: showKinesteX,
-        userId: userId,
         planCategory: getPlanCategoryFromString(
             options[selectIntegration].subOption![selectSubOption]),
         customParams: {
@@ -296,9 +289,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget createPlanView() {
     return Center(
       child: KinesteXAIFramework.createPlanView(
-          apiKey: apiKey,
-          companyName: company,
-          userId: userId,
           isShowKinestex: showKinesteX,
           planName: options[selectIntegration].subOption![selectSubOption],
           customParams: {
@@ -314,10 +304,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget createWorkoutView() {
     return Center(
       child: KinesteXAIFramework.createWorkoutView(
-          apiKey: apiKey,
           isShowKinestex: showKinesteX,
-          companyName: company,
-          userId: userId,
           workoutName: options[selectIntegration].subOption![selectSubOption],
           customParams: {
             "style": "dark", // light or dark theme (default is dark)
@@ -332,10 +319,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget createChallengeView() {
     return Center(
       child: KinesteXAIFramework.createChallengeView(
-          apiKey: apiKey,
-          companyName: company,
           isShowKinestex: showKinesteX,
-          userId: userId,
           exercise: "jz73VFlUyZ9nyd64OjRb",
           countdown: 100,
           customParams: {
@@ -347,13 +331,11 @@ class _MyHomePageState extends State<MyHomePage> {
           }),
     );
   }
+
   Widget createLeaderboardView() {
     return Center(
       child: KinesteXAIFramework.createLeaderboardView(
-          apiKey: apiKey,
-          companyName: company,
           isShowKinestex: showKinesteX,
-          userId: userId,
           exercise: "Squats",
           customParams: {
             "style": "dark", // light or dark theme (default is dark)
@@ -368,13 +350,11 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget createExperienceView() {
     return Center(
       child: KinesteXAIFramework.createExperienceView(
-          apiKey: apiKey,
-          companyName: company,
           isShowKinestex: showKinesteX,
-          userId: userId,
-          experience: "box",
+          experience: "assessment",
           customParams: {
             "style": "dark", // light or dark theme (default is dark)
+            "exercise": "balloonpop",
           },
           isLoading: ValueNotifier<bool>(false),
           onMessageReceived: (message) {
@@ -386,10 +366,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget createPersonalizedPlanView() {
     return Center(
       child: KinesteXAIFramework.createPersonalizedPlanView(
-          apiKey: apiKey,
-          companyName: company,
           isShowKinestex: showKinesteX,
-          userId: userId,
           customParams: {
             "style": "dark", // light or dark theme (default is dark)
           },
@@ -403,9 +380,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget createWorkoutEditorView() {
     return Center(
       child: KinesteXAIFramework.createAdminWorkoutEditor(
-          apiKey: apiKey,
-          companyName: company,
-          userId: userId,
           organization: "your_organization_name",
           isShowKinestex: showKinesteX,
           customParams: {
@@ -418,7 +392,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-
   Widget createCameraComponent() {
     return Stack(
       children: [
@@ -427,10 +400,7 @@ class _MyHomePageState extends State<MyHomePage> {
               valueListenable: updateExercise,
               builder: (context, value, _) {
                 return KinesteXAIFramework.createCameraComponent(
-                  apiKey: apiKey,
-                  companyName: company,
                   isShowKinestex: showKinesteX,
-                  userId: userId,
                   exercises: ["Squats", "Jumping Jack"],
                   currentExercise: "Squats",
                   customParams: {
@@ -520,12 +490,12 @@ class _MyHomePageState extends State<MyHomePage> {
                       scale: 1,
                       child: Radio(
                           fillColor: MaterialStateProperty.resolveWith<Color>(
-                                  (Set<MaterialState> states) {
-                                if (selectIntegrationNum != selectIntegration) {
-                                  return Colors.grey;
-                                }
-                                return Colors.green;
-                              }),
+                              (Set<MaterialState> states) {
+                            if (selectIntegrationNum != selectIntegration) {
+                              return Colors.grey;
+                            }
+                            return Colors.green;
+                          }),
                           focusColor: Colors.green,
                           value: selectIntegrationNum,
                           groupValue: selectIntegration,
@@ -534,12 +504,12 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   SizedBox containerSubOption(
-      BuildContext context,
-      int selectIntegrationNum,
-      String text,
-      VoidCallback ontap,
-      Function(int?)? ontap1,
-      ) {
+    BuildContext context,
+    int selectIntegrationNum,
+    String text,
+    VoidCallback ontap,
+    Function(int?)? ontap1,
+  ) {
     double sizeHeight = MediaQuery.of(context).size.height / 100;
 
     return SizedBox(
@@ -560,12 +530,12 @@ class _MyHomePageState extends State<MyHomePage> {
                       scale: 1,
                       child: Radio(
                           fillColor: MaterialStateProperty.resolveWith<Color>(
-                                  (Set<MaterialState> states) {
-                                if (selectIntegrationNum != selectSubOption) {
-                                  return Colors.grey;
-                                }
-                                return Colors.green;
-                              }),
+                              (Set<MaterialState> states) {
+                            if (selectIntegrationNum != selectSubOption) {
+                              return Colors.grey;
+                            }
+                            return Colors.green;
+                          }),
                           focusColor: Colors.green,
                           value: selectIntegrationNum,
                           groupValue: selectSubOption,

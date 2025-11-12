@@ -16,10 +16,7 @@ With this integration option we displays 3 best workout plans based on the provi
   Widget createMainView() {
     return Center(
       child: KinesteXAIFramework.createMainView(
-        apiKey: apiKey,
-        companyName: company,
         isShowKinestex: showKinesteX,
-        userId: userId,
         planCategory: PlanCategory.Cardio,
         customParams: {
           "style": "dark", // light or dark theme (default is dark)

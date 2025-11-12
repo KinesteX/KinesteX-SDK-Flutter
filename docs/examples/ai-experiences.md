@@ -1,15 +1,37 @@
 Complete code example for the `createExperienceView` function:
+
 ```dart
 import 'package:flutter/material.dart';
 import 'package:kinestex_sdk_flutter/kinestex_sdk.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await KinesteXAIFramework.initialize(
+    apiKey: "your_api_key",
+    companyName: "your_company_name",
+    userId: "your_user_id",
+  );
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void dispose() {
+    disposeKinesteXAIFramework();
+    super.dispose();
+  }
+
+  Future<void> disposeKinesteXAIFramework() async {
+    await KinesteXAIFramework.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +54,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   ValueNotifier<bool> showKinesteX = ValueNotifier<bool>(false);
-  
-  // Your KinesteX credentials
-  final String apiKey = yourapikey;
-  final String company = yourcompanyname;
-  final String userId = youruserid;
 
   @override
   void initState() {
@@ -79,11 +96,12 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget createExperienceView() {
     return Center(
       child: KinesteXAIFramework.createExperienceView(
-        apiKey: apiKey,
-        companyName: company,
         isShowKinestex: showKinesteX,
-        userId: userId,
-        experience: "box",
+        experience: "assessment",
+        customParams: {
+          "style": "dark", // light or dark theme (default is dark)
+          "exercise": "balloonpop" // which activity to display. Please contact us for details
+        },
         isLoading: ValueNotifier<bool>(false),
         onMessageReceived: handleWebViewMessage,
       ),

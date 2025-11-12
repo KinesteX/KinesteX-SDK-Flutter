@@ -18,10 +18,7 @@ Quickly add dynamic workout experiences to your app without the complexity of in
 
 ```dart
 KinesteXAIFramework.createWorkoutView(
-  apiKey: apiKey, // Your unique API key
   isShowKinestex: showKinesteX, // Boolean to show KinesteX branding
-  companyName: company, // Name of your company
-  userId: userId, // Unique identifier for the user
   workoutName: "Fitness Lite", // Specify the workout name or ID here
   customParams: {
     "style": "dark", // light or dark theme (default is dark)
