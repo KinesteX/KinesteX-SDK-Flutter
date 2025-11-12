@@ -12,6 +12,8 @@
 | [`createLeaderboardView`](./plug-and-play/leaderboard.md)                   | Displays Real-time leaderboard for one challenge exercise              | [View Documentation](./plug-and-play/leaderboard.md)        |
 | [`createExperienceView`](./plug-and-play/ai-experiences.md)                 | Displays AI Experience. Please contact support for more details | [View Documentation](./plug-and-play/ai-experiences.md)     |
 | [`createPersonalizedPlanView (Beta)`](./plug-and-play/personalized-plan.md) | Displays Personalized AI Plan depending on user's biometrics and assessment results. Please contact support for more details| [View Documentation](./plug-and-play/personalized-plan.md)  |
+| [`createWorkoutEditorView`](./plug-and-play/workout-editor.md) | Displays a workout editor view from admin dashboard. Please contact us for details on usage | [View Documentation](./plug-and-play/workout-editor.md)  |
+
 
 ## Create Custom AI Experiences:
 
@@ -41,6 +43,7 @@
 - [Leaderboard](./plug-and-play/leaderboard.md)
 - [Gamified AI Experiences](./plug-and-play/ai-experiences.md)
 - [Personalized AI Plan](./plug-and-play/personalized-plan.md)
+- [Workout Editor View](./plug-and-play/workout-editor.md)
 
 ### Custom AI Experiences:
 - [Content API - Fetch Workouts, Plans & Exercises](./custom/content-api.md)

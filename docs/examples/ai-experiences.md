@@ -96,7 +96,12 @@ class _MyHomePageState extends State<MyHomePage> {
     return Center(
       child: KinesteXAIFramework.createExperienceView(
         isShowKinestex: showKinesteX,
-        experience: "box",
+        experience: "assessment",
+        customParams: {
+          "style": "dark", // light or dark theme (default is dark)
+          "exercise": "balloonpop" // which activity to display. Please contact us for details
+        },
+        
         isLoading: ValueNotifier<bool>(false),
         onMessageReceived: handleWebViewMessage,
       ),
