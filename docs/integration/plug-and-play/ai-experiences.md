@@ -1,10 +1,13 @@
 # Immersive AI Experiences: Captivate and Motivate Your Users
 
 ### **Engaging AI-Powered Fitness**
+
 Deliver captivating fitness experiences with our cutting-edge AI solutions designed to immerse users in interactive and dynamic workouts.
 
 ### **"Fight with a Shadow"**
+
 Our first AI-driven experience, "Fight with a Shadow," leverages advanced pose motion analysis to provide real-time feedback on:
+
 - Punching technique
 - Stance and form
 - Total punch count
@@ -31,6 +34,7 @@ KinesteXAIFramework.createExperienceView(
 ```
 
 # Next steps:
+
 - ### [View handleWebViewMessage available data points](../../data.md)
 - ### [View complete code example](../../examples/ai-experiences.md)
 - ### [Explore more integration options](../overview.md)

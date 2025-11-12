@@ -102,6 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
           "style": "dark", // light or dark theme (default is dark)
           "exercise": "balloonpop" // which activity to display. Please contact us for details
         },
+        
         isLoading: ValueNotifier<bool>(false),
         onMessageReceived: handleWebViewMessage,
       ),
