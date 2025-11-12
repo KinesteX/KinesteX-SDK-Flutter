@@ -1,4 +1,5 @@
 Complete code example for the `createExperienceView` function:
+
 ```dart
 import 'package:flutter/material.dart';
 import 'package:kinestex_sdk_flutter/kinestex_sdk.dart';

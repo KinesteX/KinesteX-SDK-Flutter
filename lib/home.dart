@@ -354,7 +354,7 @@ class _MyHomePageState extends State<MyHomePage> {
           experience: "assessment",
           customParams: {
             "style": "dark", // light or dark theme (default is dark)
-            "exercise": "balloonpop" // specify the experience, please contact us for support
+            "exercise": "balloonpop",
           },
           isLoading: ValueNotifier<bool>(false),
           onMessageReceived: (message) {

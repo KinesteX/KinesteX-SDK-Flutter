@@ -22,7 +22,7 @@ enum IntegrationOptionType {
   EXPERIENCE(
     title: 'AI Experience',
     category: 'Experience',
-    subOptions: ['Box'],
+    subOptions: ['Balloon Pop Game'],
   ),
   LEADERBOARD(
     title: 'Leaderboard',

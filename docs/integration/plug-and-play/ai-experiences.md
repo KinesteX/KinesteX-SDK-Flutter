@@ -21,10 +21,10 @@ This experience features a **virtual dynamic punching bag** that reacts to every
 ```dart
 KinesteXAIFramework.createExperienceView(
   isShowKinestex: showKinesteX, // Boolean to show KinesteX branding
-     experience: "assessment",
+  experience: "assessment", // Specify the experience 
   customParams: {
-          "style": "dark", // light or dark theme (default is dark)
-          "exercise": "balloonpop" // which activity to display. Please contact us for details
+    "style": "dark", // light or dark theme (default is dark)
+    "exercise": "balloonpop" // which activity to display. Please contact us for details
   },
   isLoading: ValueNotifier<bool>(false), // Loading state
   onMessageReceived: (message) {
