@@ -20,6 +20,30 @@ class _MyHomePageState extends State<MyHomePage> {
   String optionType = generateOptions().first.optionType;
   String title = generateOptions().first.title;
 
+  final customWorkouts = [
+    const WorkoutSequenceExercise(
+      exerciseId: 'Squats',
+      reps: 10,
+      duration: null,
+      includeRestPeriod: true,
+      restDuration: 30,
+    ),
+    const WorkoutSequenceExercise(
+      exerciseId: 'Push-ups',
+      reps: 15,
+      duration: null,
+      includeRestPeriod: true,
+      restDuration: 20,
+    ),
+    const WorkoutSequenceExercise(
+      exerciseId: 'Plank',
+      reps: null,
+      duration: 60,
+      includeRestPeriod: true,
+      restDuration: 30,
+    ),
+  ];
+
   ValueNotifier<bool> showKinesteX = ValueNotifier<bool>(false);
   ValueNotifier<int> reps = ValueNotifier<int>(0);
   ValueNotifier<String> mistake = ValueNotifier<String>("--");
@@ -202,14 +226,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
       const Spacer(),
       ElevatedButton(
-        child: Text(
-          'View $title',
-          style: const TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              fontStyle: FontStyle.normal),
-        ),
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.all(16),
           backgroundColor: Colors.green,
@@ -225,6 +241,14 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: () {
           showKinesteX.value = true;
         },
+        child: Text(
+          'View $title',
+          style: const TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.normal),
+        ),
       ),
     ]);
   }
@@ -247,6 +271,8 @@ class _MyHomePageState extends State<MyHomePage> {
         return createPersonalizedPlanView();
       case 7:
         return createWorkoutEditorView();
+      case 8:
+        return createCustomWorkout();
       default:
         return createCameraComponent();
     }
@@ -389,6 +415,19 @@ class _MyHomePageState extends State<MyHomePage> {
           onMessageReceived: (message) {
             handleWebViewMessage(message);
           }),
+    );
+  }
+
+  Widget createCustomWorkout() {
+    return Center(
+      child: KinesteXAIFramework.createCustomWorkoutView(
+        customWorkouts: customWorkouts,
+        isLoading: ValueNotifier<bool>(false),
+        isShowKinestex: showKinesteX,
+        onMessageReceived: (message) {
+          handleWebViewMessage(message);
+        },
+      ),
     );
   }
 

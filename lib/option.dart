@@ -7,7 +7,12 @@ enum IntegrationOptionType {
   WORKOUT_PLAN(
     title: 'Workout Plan',
     category: 'Plan',
-    subOptions: ['Full Cardio', 'Elastic Evolution', 'Circuit Training', 'Fitness Cardio'],
+    subOptions: [
+      'Full Cardio',
+      'Elastic Evolution',
+      'Circuit Training',
+      'Fitness Cardio'
+    ],
   ),
   WORKOUT(
     title: 'Workout',
@@ -30,9 +35,9 @@ enum IntegrationOptionType {
     subOptions: [],
   ),
   PERSONALIZED_PLAN(
-  title: '(Beta) Personalized Plan',
-  category: '(Beta) Personalized Plan',
-  subOptions: [],
+    title: '(Beta) Personalized Plan',
+    category: '(Beta) Personalized Plan',
+    subOptions: [],
   ),
   ADMIN_WORKOUT_EDITOR(
     title: 'Workout Editor',
@@ -42,6 +47,11 @@ enum IntegrationOptionType {
   CAMERA(
     title: 'Camera',
     category: '',
+    subOptions: [],
+  ),
+  CUSTOM_WORKOUT(
+    title: 'Custom Workout',
+    category: 'Custom Workout',
     subOptions: [],
   );
 

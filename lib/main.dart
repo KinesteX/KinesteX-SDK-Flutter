@@ -8,9 +8,9 @@ import 'home.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await KinesteXAIFramework.initialize(
-    apiKey: "your-api-key",
-    companyName: "your-company-name",
-    userId: "your-user-id",
+    apiKey: "13c5398cf7a98e3469f6fc8a9a5b2b9d5c8a4814",
+    companyName: "KinesteX",
+    userId: "GibOrTgo2KNuldDYrTARMnqba2T2",
   );
   runApp(BlocProvider(
     create: (context) => DefaultCubit(),
