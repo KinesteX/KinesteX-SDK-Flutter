@@ -7,5 +7,6 @@ Plug-ang-play integration options:
 - ### [Challenge (createChallengeView)](./challenge.md)
 - ### [AI Experiences (createExperienceView)](./ai-experiences.md)
 
-Custom integration options (beta):
+Custom integration options:
+- ### [Custom Workout Sequences (createCustomWorkoutView)](./custom-workout.md)
 - ### [Motion Analysis (createCameraComponent)](./motion-analysis.md)

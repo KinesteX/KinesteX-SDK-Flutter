@@ -20,6 +20,38 @@ class _MyHomePageState extends State<MyHomePage> {
   String optionType = generateOptions().first.optionType;
   String title = generateOptions().first.title;
 
+  final List<WorkoutSequenceExercise> customWorkoutExercises = [
+    const WorkoutSequenceExercise(
+      exerciseId: "jz73VFlUyZ9nyd64OjRb",
+      reps: 15,
+      duration: null,
+      includeRestPeriod: true,
+      restDuration: 20,
+    ),
+    const WorkoutSequenceExercise(
+      exerciseId: "ZVMeLsaXQ9Tzr5JYXg29",
+      reps: 10,
+      duration: 30,
+      includeRestPeriod: true,
+      restDuration: 15,
+    ),
+    // duplicate of the exercise above to create a set
+    const WorkoutSequenceExercise(
+      exerciseId: "ZVMeLsaXQ9Tzr5JYXg29",
+      reps: 10,
+      duration: 30,
+      includeRestPeriod: true,
+      restDuration: 15,
+    ),
+    const WorkoutSequenceExercise(
+      exerciseId: "gJGOiZhCvJrhEP7sTy78",
+      reps: 20,
+      duration: null,
+      includeRestPeriod: false,
+      restDuration: 0,
+    ),
+  ];
+
   ValueNotifier<bool> showKinesteX = ValueNotifier<bool>(false);
   ValueNotifier<int> reps = ValueNotifier<int>(0);
   ValueNotifier<String> mistake = ValueNotifier<String>("--");
@@ -40,6 +72,14 @@ class _MyHomePageState extends State<MyHomePage> {
         mistake.value = message.data['value'] ?? '--';
       });
     } else {
+      if (message.data['type'] == 'all_resources_loaded') {
+        print("All resources loaded");
+        KinesteXAIFramework.sendAction("workout_activity_action", "start");
+      } else if (message.data['type'] == 'workout_exit_request') {
+        setState(() {
+          showKinesteX.value = false;
+        });
+      }
       // Handle other message types
       print("Other message received: ${message.data}");
     }
@@ -202,14 +242,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
       const Spacer(),
       ElevatedButton(
-        child: Text(
-          'View $title',
-          style: const TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              fontStyle: FontStyle.normal),
-        ),
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.all(16),
           backgroundColor: Colors.green,
@@ -225,6 +257,14 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: () {
           showKinesteX.value = true;
         },
+        child: Text(
+          'View $title',
+          style: const TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.normal),
+        ),
       ),
     ]);
   }
@@ -247,6 +287,10 @@ class _MyHomePageState extends State<MyHomePage> {
         return createPersonalizedPlanView();
       case 7:
         return createWorkoutEditorView();
+      case 8:
+        return createCameraComponent();
+      case 9:
+        return createCustomWorkout();
       default:
         return createCameraComponent();
     }
@@ -389,6 +433,19 @@ class _MyHomePageState extends State<MyHomePage> {
           onMessageReceived: (message) {
             handleWebViewMessage(message);
           }),
+    );
+  }
+
+  Widget createCustomWorkout() {
+    return Center(
+      child: KinesteXAIFramework.createCustomWorkoutView(
+        customWorkouts: customWorkoutExercises,
+        isLoading: ValueNotifier<bool>(false),
+        isShowKinestex: showKinesteX,
+        onMessageReceived: (message) {
+          handleWebViewMessage(message);
+        },
+      ),
     );
   }
 

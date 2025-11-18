@@ -9,16 +9,18 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await KinesteXAIFramework.initialize(
     apiKey: "your-api-key",
-    companyName: "your-company-name",
+    companyName: "your-company",
     userId: "your-user-id",
   );
-  runApp(BlocProvider(
-    create: (context) => DefaultCubit(),
-    child: const MaterialApp(
-      // home: ContentView(),
-      home: MyHomePage(),
+  runApp(
+    BlocProvider(
+      create: (context) => DefaultCubit(),
+      child: const MaterialApp(
+        // home: ContentView(),
+        home: MyHomePage(),
+      ),
     ),
-  ));
+  );
 }
 
 class MyApp extends StatefulWidget {
