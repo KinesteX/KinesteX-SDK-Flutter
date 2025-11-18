@@ -19,24 +19,35 @@ class CustomWorkoutScreen extends StatefulWidget {
 
 class _CustomWorkoutScreenState extends State<CustomWorkoutScreen> {
   // 1. Define your workout sequence
-  final customWorkouts = [
+  final List<WorkoutSequenceExercise> customWorkoutExercises = [
     const WorkoutSequenceExercise(
-      exerciseId: 'Squats',
+      exerciseId: "jz73VFlUyZ9nyd64OjRb",
       reps: 15,
+      duration: null,
       includeRestPeriod: true,
       restDuration: 20,
     ),
     const WorkoutSequenceExercise(
-      exerciseId: 'Push-ups',
+      exerciseId: "ZVMeLsaXQ9Tzr5JYXg29",
       reps: 10,
+      duration: 30,
+      includeRestPeriod: true,
+      restDuration: 15,
+    ),
+    // duplicate of the exercise above to create a set
+    const WorkoutSequenceExercise(
+      exerciseId: "ZVMeLsaXQ9Tzr5JYXg29",
+      reps: 10,
+      duration: 30,
       includeRestPeriod: true,
       restDuration: 15,
     ),
     const WorkoutSequenceExercise(
-      exerciseId: 'Plank',
-      duration: 60,
-      includeRestPeriod: true,
-      restDuration: 30,
+      exerciseId: "gJGOiZhCvJrhEP7sTy78",
+      reps: 20,
+      duration: null,
+      includeRestPeriod: false,
+      restDuration: 0,
     ),
   ];
 
@@ -224,10 +235,36 @@ class AdvancedCustomWorkoutScreen extends StatefulWidget {
 }
 
 class _AdvancedCustomWorkoutScreenState extends State<AdvancedCustomWorkoutScreen> {
-  final customWorkouts = [
-    const WorkoutSequenceExercise(exerciseId: 'Squats', reps: 15, restDuration: 20),
-    const WorkoutSequenceExercise(exerciseId: 'Push-ups', reps: 10, restDuration: 15),
-    const WorkoutSequenceExercise(exerciseId: 'Plank', duration: 60, restDuration: 30),
+  final List<WorkoutSequenceExercise> customWorkoutExercises = [
+    const WorkoutSequenceExercise(
+      exerciseId: "jz73VFlUyZ9nyd64OjRb",
+      reps: 15,
+      duration: null,
+      includeRestPeriod: true,
+      restDuration: 20,
+    ),
+    const WorkoutSequenceExercise(
+      exerciseId: "ZVMeLsaXQ9Tzr5JYXg29",
+      reps: 10,
+      duration: 30,
+      includeRestPeriod: true,
+      restDuration: 15,
+    ),
+    // duplicate of the exercise above to create a set
+    const WorkoutSequenceExercise(
+      exerciseId: "ZVMeLsaXQ9Tzr5JYXg29",
+      reps: 10,
+      duration: 30,
+      includeRestPeriod: true,
+      restDuration: 15,
+    ),
+    const WorkoutSequenceExercise(
+      exerciseId: "gJGOiZhCvJrhEP7sTy78",
+      reps: 20,
+      duration: null,
+      includeRestPeriod: false,
+      restDuration: 0,
+    ),
   ];
 
   ValueNotifier<bool> showKinesteX = ValueNotifier<bool>(false);
@@ -299,7 +336,7 @@ class _AdvancedCustomWorkoutScreenState extends State<AdvancedCustomWorkoutScree
         builder: (context, isShowing, _) {
           if (isShowing) {
             return KinesteXAIFramework.createCustomWorkoutView(
-              customWorkouts: customWorkouts,
+              customWorkouts: customWorkoutExercises,
               isShowKinestex: showKinesteX,
               isLoading: ValueNotifier<bool>(false),
               customParams: {"planC": "#FF5722"},

@@ -20,27 +20,35 @@ class _MyHomePageState extends State<MyHomePage> {
   String optionType = generateOptions().first.optionType;
   String title = generateOptions().first.title;
 
-  final customWorkouts = [
+  final List<WorkoutSequenceExercise> customWorkoutExercises = [
     const WorkoutSequenceExercise(
-      exerciseId: 'Squats',
-      reps: 10,
-      duration: null,
-      includeRestPeriod: true,
-      restDuration: 30,
-    ),
-    const WorkoutSequenceExercise(
-      exerciseId: 'Push-ups',
+      exerciseId: "jz73VFlUyZ9nyd64OjRb",
       reps: 15,
       duration: null,
       includeRestPeriod: true,
       restDuration: 20,
     ),
     const WorkoutSequenceExercise(
-      exerciseId: 'Plank',
-      reps: null,
-      duration: 60,
+      exerciseId: "ZVMeLsaXQ9Tzr5JYXg29",
+      reps: 10,
+      duration: 30,
       includeRestPeriod: true,
-      restDuration: 30,
+      restDuration: 15,
+    ),
+    // duplicate of the exercise above to create a set
+    const WorkoutSequenceExercise(
+      exerciseId: "ZVMeLsaXQ9Tzr5JYXg29",
+      reps: 10,
+      duration: 30,
+      includeRestPeriod: true,
+      restDuration: 15,
+    ),
+    const WorkoutSequenceExercise(
+      exerciseId: "gJGOiZhCvJrhEP7sTy78",
+      reps: 20,
+      duration: null,
+      includeRestPeriod: false,
+      restDuration: 0,
     ),
   ];
 
@@ -421,7 +429,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget createCustomWorkout() {
     return Center(
       child: KinesteXAIFramework.createCustomWorkoutView(
-        customWorkouts: customWorkouts,
+        customWorkouts: customWorkoutExercises,
         isLoading: ValueNotifier<bool>(false),
         isShowKinestex: showKinesteX,
         onMessageReceived: (message) {

@@ -9,26 +9,37 @@ Create personalized workout sequences with custom exercises, repetitions, durati
 ### 1. Define Your Workout
 
 ```dart
-final customWorkouts = [
-  const WorkoutSequenceExercise(
-    exerciseId: 'Squats',
-    reps: 15,
-    includeRestPeriod: true,
-    restDuration: 20,
-  ),
-  const WorkoutSequenceExercise(
-    exerciseId: 'Push-ups',
-    reps: 10,
-    includeRestPeriod: true,
-    restDuration: 15,
-  ),
-  const WorkoutSequenceExercise(
-    exerciseId: 'Plank',
-    duration: 60,  // Time-based exercise
-    includeRestPeriod: true,
-    restDuration: 30,
-  ),
-];
+final List<WorkoutSequenceExercise> customWorkoutExercises = [
+    const WorkoutSequenceExercise(
+      exerciseId: "jz73VFlUyZ9nyd64OjRb",
+      reps: 15,
+      duration: null,
+      includeRestPeriod: true,
+      restDuration: 20,
+    ),
+    const WorkoutSequenceExercise(
+      exerciseId: "ZVMeLsaXQ9Tzr5JYXg29",
+      reps: 10,
+      duration: 30,
+      includeRestPeriod: true,
+      restDuration: 15,
+    ),
+    // duplicate of the exercise above to create a set
+    const WorkoutSequenceExercise(
+      exerciseId: "ZVMeLsaXQ9Tzr5JYXg29",
+      reps: 10,
+      duration: 30,
+      includeRestPeriod: true,
+      restDuration: 15,
+    ),
+    const WorkoutSequenceExercise(
+      exerciseId: "gJGOiZhCvJrhEP7sTy78",
+      reps: 20,
+      duration: null,
+      includeRestPeriod: false,
+      restDuration: 0,
+    ),
+  ];
 ```
 
 ### 2. Initialize SDK
@@ -52,7 +63,7 @@ ValueNotifier<bool> showKinesteX = ValueNotifier<bool>(false);
 
 Widget buildWorkout() {
   return KinesteXAIFramework.createCustomWorkoutView(
-    customWorkouts: customWorkouts,
+    customWorkouts: customWorkoutExercises,
     isShowKinestex: showKinesteX,
     isLoading: ValueNotifier<bool>(false),
     onMessageReceived: (message) {
@@ -107,27 +118,33 @@ ElevatedButton(
 ### Rep-Based Exercise
 ```dart
 WorkoutSequenceExercise(
-  exerciseId: 'Squats',
+  exerciseId: "jz73VFlUyZ9nyd64OjRb",
   reps: 15,
-  duration: null,  // Set to null
+  duration: null,
+  includeRestPeriod: true,
+  restDuration: 20,
 )
 ```
 
 ### Time-Based Exercise
 ```dart
 WorkoutSequenceExercise(
-  exerciseId: 'Plank',
-  reps: null,      // Set to null
-  duration: 60,
+  exerciseId: "ZVMeLsaXQ9Tzr5JYXg29",
+  reps: null,
+  duration: 30,
+  includeRestPeriod: true,
+  restDuration: 15,
 )
 ```
 
 ### Combined (ends when either condition is met)
 ```dart
 WorkoutSequenceExercise(
-  exerciseId: 'Burpees',
+  exerciseId: "gJGOiZhCvJrhEP7sTy78",
   reps: 20,
-  duration: 120,   // Whichever comes first
+  duration: 30,
+  includeRestPeriod: false,
+  restDuration: 0,
 )
 ```
 
@@ -135,12 +152,11 @@ WorkoutSequenceExercise(
 
 ## Getting Exercise IDs
 
-### Option 1: Use Common Exercise Names
+### Option 1: Use Common Exercise IDs
 ```dart
-exerciseId: 'Squats'
-exerciseId: 'Push-ups'
-exerciseId: 'Plank'
-exerciseId: 'Lunges'
+exerciseId: 'jz73VFlUyZ9nyd64OjRb'
+exerciseId: 'ZVMeLsaXQ9Tzr5JYXg29'
+exerciseId: 'gJGOiZhCvJrhEP7sTy78'
 ```
 
 ### Option 2: Fetch from Content API
@@ -183,23 +199,35 @@ class CustomWorkoutScreen extends StatefulWidget {
 }
 
 class _CustomWorkoutScreenState extends State<CustomWorkoutScreen> {
-  final customWorkouts = [
+  final List<WorkoutSequenceExercise> customWorkoutExercises = [
     const WorkoutSequenceExercise(
-      exerciseId: 'Squats',
-      reps: 10,
-      includeRestPeriod: true,
-      restDuration: 30,
-    ),
-    const WorkoutSequenceExercise(
-      exerciseId: 'Push-ups',
+      exerciseId: "jz73VFlUyZ9nyd64OjRb",
       reps: 15,
+      duration: null,
       includeRestPeriod: true,
       restDuration: 20,
     ),
     const WorkoutSequenceExercise(
-      exerciseId: 'Plank',
-      duration: 60,
+      exerciseId: "ZVMeLsaXQ9Tzr5JYXg29",
+      reps: 10,
+      duration: 30,
+      includeRestPeriod: true,
+      restDuration: 15,
+    ),
+    // duplicate of the exercise above to create a set
+    const WorkoutSequenceExercise(
+      exerciseId: "ZVMeLsaXQ9Tzr5JYXg29",
+      reps: 10,
+      duration: 30,
+      includeRestPeriod: true,
+      restDuration: 15,
+    ),
+    const WorkoutSequenceExercise(
+      exerciseId: "gJGOiZhCvJrhEP7sTy78",
+      reps: 20,
+      duration: null,
       includeRestPeriod: false,
+      restDuration: 0,
     ),
   ];
 
@@ -255,7 +283,7 @@ class _CustomWorkoutScreenState extends State<CustomWorkoutScreen> {
         builder: (context, isShowing, _) {
           if (isShowing) {
             return KinesteXAIFramework.createCustomWorkoutView(
-              customWorkouts: customWorkouts,
+              customWorkouts: customWorkoutExercises,
               isShowKinestex: showKinesteX,
               isLoading: ValueNotifier<bool>(false),
               onMessageReceived: handleWebViewMessage,
@@ -303,7 +331,7 @@ class _CustomWorkoutScreenState extends State<CustomWorkoutScreen> {
 ### Add Custom Colors
 ```dart
 KinesteXAIFramework.createCustomWorkoutView(
-  customWorkouts: customWorkouts,
+  customWorkouts: customWorkoutExercises,
   customParams: {
     "planC": "#FF5722",  // Your brand color
   },
@@ -314,7 +342,7 @@ KinesteXAIFramework.createCustomWorkoutView(
 ### Add User Details
 ```dart
 KinesteXAIFramework.createCustomWorkoutView(
-  customWorkouts: customWorkouts,
+  customWorkouts: customWorkoutExercises,
   user: UserDetails(
     name: "John Doe",
     age: 30,
@@ -333,25 +361,25 @@ KinesteXAIFramework.createCustomWorkoutView(
 ```dart
 final customWorkouts = [
   // Set 1
-  WorkoutSequenceExercise(exerciseId: 'Squats', reps: 10),
-  WorkoutSequenceExercise(exerciseId: 'Rest', duration: 30),
+  WorkoutSequenceExercise(exerciseId: 'jz73VFlUyZ9nyd64OjRb', reps: 10),
+  WorkoutSequenceExercise(exerciseId: 'jz73VFlUyZ9nyd64OjRb', duration: 30),
 
   // Set 2
-  WorkoutSequenceExercise(exerciseId: 'Squats', reps: 10),
-  WorkoutSequenceExercise(exerciseId: 'Rest', duration: 30),
+  WorkoutSequenceExercise(exerciseId: 'jz73VFlUyZ9nyd64OjRb', reps: 10),
+  WorkoutSequenceExercise(exerciseId: 'jz73VFlUyZ9nyd64OjRb', duration: 30),
 
   // Set 3
-  WorkoutSequenceExercise(exerciseId: 'Squats', reps: 10),
+  WorkoutSequenceExercise(exerciseId: 'jz73VFlUyZ9nyd64OjRb', reps: 10),
 ];
 ```
 
 ### Circuit Training
 ```dart
 final customWorkouts = [
-  WorkoutSequenceExercise(exerciseId: 'Squats', reps: 15, restDuration: 10),
-  WorkoutSequenceExercise(exerciseId: 'Push-ups', reps: 10, restDuration: 10),
-  WorkoutSequenceExercise(exerciseId: 'Lunges', reps: 12, restDuration: 10),
-  WorkoutSequenceExercise(exerciseId: 'Plank', duration: 30, restDuration: 60),
+  WorkoutSequenceExercise(exerciseId: 'jz73VFlUyZ9nyd64OjRb', reps: 15, restDuration: 10),
+  WorkoutSequenceExercise(exerciseId: 'ZVMeLsaXQ9Tzr5JYXg29', reps: 10, restDuration: 10),
+  WorkoutSequenceExercise(exerciseId: 'gJGOiZhCvJrhEP7sTy78', reps: 12, restDuration: 10),
+  WorkoutSequenceExercise(exerciseId: 'jz73VFlUyZ9nyd64OjRb', duration: 30, restDuration: 60),
   // Repeat circuit...
 ];
 ```
