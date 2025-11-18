@@ -72,6 +72,14 @@ class _MyHomePageState extends State<MyHomePage> {
         mistake.value = message.data['value'] ?? '--';
       });
     } else {
+      if (message.data['type'] == 'all_resources_loaded') {
+        print("All resources loaded");
+        KinesteXAIFramework.sendAction("workout_activity_action", "start");
+      } else if (message.data['type'] == 'workout_exit_request') {
+        setState(() {
+          showKinesteX.value = false;
+        });
+      }
       // Handle other message types
       print("Other message received: ${message.data}");
     }
@@ -280,6 +288,8 @@ class _MyHomePageState extends State<MyHomePage> {
       case 7:
         return createWorkoutEditorView();
       case 8:
+        return createCameraComponent();
+      case 9:
         return createCustomWorkout();
       default:
         return createCameraComponent();

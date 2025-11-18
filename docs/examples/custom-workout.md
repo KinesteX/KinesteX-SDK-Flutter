@@ -2,408 +2,339 @@
 
 A complete, ready-to-use example for implementing custom workout sequences.
 
----
-
-## Full Working Code
-
 ```dart
+// custom_workout_always_mounted_with_loading.dart
 import 'package:flutter/material.dart';
 import 'package:kinestex_sdk_flutter/kinestex_sdk.dart';
+import 'package:permission_handler/permission_handler.dart';
 
-class CustomWorkoutScreen extends StatefulWidget {
-  const CustomWorkoutScreen({Key? key}) : super(key: key);
-
-  @override
-  State<CustomWorkoutScreen> createState() => _CustomWorkoutScreenState();
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await KinesteXAIFramework.initialize(
+    apiKey: "your_api_key",
+    companyName: "your_company_name",
+    userId: "your_user_id",
+  );
+  runApp(const MyApp());
 }
 
-class _CustomWorkoutScreenState extends State<CustomWorkoutScreen> {
-  // 1. Define your workout sequence
-  final List<WorkoutSequenceExercise> customWorkoutExercises = [
-    const WorkoutSequenceExercise(
-      exerciseId: "jz73VFlUyZ9nyd64OjRb",
-      reps: 15,
-      duration: null,
-      includeRestPeriod: true,
-      restDuration: 20,
-    ),
-    const WorkoutSequenceExercise(
-      exerciseId: "ZVMeLsaXQ9Tzr5JYXg29",
-      reps: 10,
-      duration: 30,
-      includeRestPeriod: true,
-      restDuration: 15,
-    ),
-    // duplicate of the exercise above to create a set
-    const WorkoutSequenceExercise(
-      exerciseId: "ZVMeLsaXQ9Tzr5JYXg29",
-      reps: 10,
-      duration: 30,
-      includeRestPeriod: true,
-      restDuration: 15,
-    ),
-    const WorkoutSequenceExercise(
-      exerciseId: "gJGOiZhCvJrhEP7sTy78",
-      reps: 20,
-      duration: null,
-      includeRestPeriod: false,
-      restDuration: 0,
-    ),
-  ];
-
-  // 2. Create state variables
-  ValueNotifier<bool> showKinesteX = ValueNotifier<bool>(false);
-  ValueNotifier<int> reps = ValueNotifier<int>(0);
-  ValueNotifier<String> feedback = ValueNotifier<String>("Ready!");
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
 
   @override
-  void initState() {
-    super.initState();
-    // 3. Initialize SDK
-    KinesteXAIFramework.initialize(
-      apiKey: "your-api-key",
-      companyName: "YourCompany",
-      userId: "user-id",
-    );
-  }
+  State<MyApp> createState() => _MyAppState();
+}
 
+class _MyAppState extends State<MyApp> {
   @override
   void dispose() {
-    showKinesteX.dispose();
-    reps.dispose();
-    feedback.dispose();
+    _disposeKinesteX();
     super.dispose();
   }
 
-  // 4. Handle real-time messages
-  void handleWebViewMessage(WebViewMessage message) {
-    if (message is ExitKinestex) {
-      setState(() => showKinesteX.value = false);
-    } else if (message is Reps) {
-      setState(() => reps.value = message.data['value'] ?? 0);
-    } else if (message is Mistake) {
-      setState(() => feedback.value = message.data['value'] ?? 'Good form!');
-    } else if (message is WorkoutCompleted) {
-      setState(() => showKinesteX.value = false);
-      _showCompletionDialog();
-    }
-  }
-
-  void _showCompletionDialog() {
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: const Text("🎉 Workout Complete!"),
-        content: const Text("Great job! You finished your workout."),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx),
-            child: const Text("OK"),
-          ),
-        ],
-      ),
-    );
+  Future<void> _disposeKinesteX() async {
+    await KinesteXAIFramework.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Custom Workout'),
-        backgroundColor: Colors.blue,
-      ),
-      body: ValueListenableBuilder<bool>(
-        valueListenable: showKinesteX,
-        builder: (context, isShowing, _) {
-          // 5. Show workout view when active
-          if (isShowing) {
-            return KinesteXAIFramework.createCustomWorkoutView(
-              customWorkouts: customWorkouts,
-              isShowKinestex: showKinesteX,
-              isLoading: ValueNotifier<bool>(false),
-              onMessageReceived: handleWebViewMessage,
-            );
-          }
-
-          // 6. Show stats and start button when not active
-          return Center(
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // Display real-time reps
-                  ValueListenableBuilder<int>(
-                    valueListenable: reps,
-                    builder: (_, count, __) => Text(
-                      'Reps: $count',
-                      style: const TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Display feedback
-                  ValueListenableBuilder<String>(
-                    valueListenable: feedback,
-                    builder: (_, text, __) => Text(
-                      text,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        color: Colors.grey,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  const SizedBox(height: 48),
-
-                  // Start workout button
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 48,
-                        vertical: 16,
-                      ),
-                      backgroundColor: Colors.blue,
-                    ),
-                    onPressed: () => showKinesteX.value = true,
-                    child: const Text(
-                      'Start Workout',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
-      ),
+    return MaterialApp(
+      title: 'KinesteX Custom Workout',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: const CustomWorkoutPage(),
     );
   }
 }
-```
-
----
-
-## What This Example Does
-
-1. ✅ **Defines a workout** with 3 exercises (Squats, Push-ups, Plank)
-2. ✅ **Initializes the SDK** on screen load
-3. ✅ **Shows real-time feedback** (reps count and form corrections)
-4. ✅ **Handles workout completion** with a dialog
-5. ✅ **Manages state properly** with ValueNotifiers
-6. ✅ **Cleans up resources** on dispose
-
----
-
-## Using Exercise IDs from API
-
-If you want to use specific exercise IDs from the KinesteX API:
-
-```dart
-final customWorkouts = [
-  const WorkoutSequenceExercise(
-    exerciseId: 'jz73VFlUyZ9nyd64OjRb',  // From API/Admin Panel
-    reps: 15,
-    includeRestPeriod: true,
-    restDuration: 20,
-  ),
-  const WorkoutSequenceExercise(
-    exerciseId: 'ZVMeLsaXQ9Tzr5JYXg29',
-    reps: 10,
-    includeRestPeriod: true,
-    restDuration: 15,
-  ),
-];
-```
-
----
-
-## Advanced Example with Stats Tracking
-
-```dart
-class AdvancedCustomWorkoutScreen extends StatefulWidget {
-  const AdvancedCustomWorkoutScreen({Key? key}) : super(key: key);
+class CustomWorkoutPage extends StatefulWidget {
+  const CustomWorkoutPage({super.key});
 
   @override
-  State<AdvancedCustomWorkoutScreen> createState() => _AdvancedCustomWorkoutScreenState();
+  State<CustomWorkoutPage> createState() => _CustomWorkoutPageState();
 }
 
-class _AdvancedCustomWorkoutScreenState extends State<AdvancedCustomWorkoutScreen> {
-  final List<WorkoutSequenceExercise> customWorkoutExercises = [
-    const WorkoutSequenceExercise(
-      exerciseId: "jz73VFlUyZ9nyd64OjRb",
-      reps: 15,
-      duration: null,
-      includeRestPeriod: true,
-      restDuration: 20,
-    ),
-    const WorkoutSequenceExercise(
-      exerciseId: "ZVMeLsaXQ9Tzr5JYXg29",
-      reps: 10,
-      duration: 30,
-      includeRestPeriod: true,
-      restDuration: 15,
-    ),
-    // duplicate of the exercise above to create a set
-    const WorkoutSequenceExercise(
-      exerciseId: "ZVMeLsaXQ9Tzr5JYXg29",
-      reps: 10,
-      duration: 30,
-      includeRestPeriod: true,
-      restDuration: 15,
-    ),
-    const WorkoutSequenceExercise(
-      exerciseId: "gJGOiZhCvJrhEP7sTy78",
-      reps: 20,
-      duration: null,
-      includeRestPeriod: false,
-      restDuration: 0,
-    ),
-  ];
+class _CustomWorkoutPageState extends State<CustomWorkoutPage> {
+  // The KinesteX view is ALWAYS mounted. We only toggle visibility.
+  final ValueNotifier<bool> showKinesteX = ValueNotifier<bool>(false);
 
-  ValueNotifier<bool> showKinesteX = ValueNotifier<bool>(false);
-  ValueNotifier<int> reps = ValueNotifier<int>(0);
-  ValueNotifier<int> calories = ValueNotifier<int>(0);
-  ValueNotifier<String> feedback = ValueNotifier<String>("Ready!");
-  ValueNotifier<String> currentExercise = ValueNotifier<String>("--");
+  // Signals when SDK reports all resources loaded.
+  final ValueNotifier<bool> allResourcesLoaded = ValueNotifier<bool>(false);
+
+  // Optional: SDK loading notifier (not used by host UI).
+  final ValueNotifier<bool> sdkLoading = ValueNotifier<bool>(false);
+
+  bool permissionGranted = false;
+
+  late final List<WorkoutSequenceExercise> customWorkoutExercises;
 
   @override
   void initState() {
     super.initState();
-    KinesteXAIFramework.initialize(
-      apiKey: "your-api-key",
-      companyName: "YourCompany",
-      userId: "user-id",
-    );
+    _requestCameraPermission();
+
+    customWorkoutExercises = const [
+      WorkoutSequenceExercise(
+        exerciseId: "jz73VFlUyZ9nyd64OjRb",
+        reps: 15,
+        duration: null,
+        includeRestPeriod: true,
+        restDuration: 20,
+      ),
+      WorkoutSequenceExercise(
+        exerciseId: "ZVMeLsaXQ9Tzr5JYXg29",
+        reps: 10,
+        duration: 30,
+        includeRestPeriod: true,
+        restDuration: 15,
+      ),
+      WorkoutSequenceExercise(
+        exerciseId: "ZVMeLsaXQ9Tzr5JYXg29",
+        reps: 10,
+        duration: 30,
+        includeRestPeriod: true,
+        restDuration: 15,
+      ),
+      WorkoutSequenceExercise(
+        exerciseId: "gJGOiZhCvJrhEP7sTy78",
+        reps: 20,
+        duration: null,
+        includeRestPeriod: false,
+        restDuration: 0,
+      ),
+    ];
   }
 
-  void handleWebViewMessage(WebViewMessage message) {
-    if (message is ExitKinestex) {
-      setState(() => showKinesteX.value = false);
-    } else if (message is Reps) {
-      setState(() => reps.value = message.data['value'] ?? 0);
-    } else if (message is Mistake) {
-      setState(() => feedback.value = message.data['value'] ?? 'Good form!');
-    } else if (message is WorkoutStarted) {
-      setState(() => currentExercise.value = "Starting...");
-    } else if (message is ExerciseCompleted) {
-      final exercise = message.data['exercise'] ?? 'Exercise';
-      setState(() => currentExercise.value = exercise);
-      print("Completed: $exercise");
-    } else if (message is WorkoutOverview) {
-      final totalCals = message.data['totalCalories'] ?? 0;
-      setState(() => calories.value = totalCals);
-    } else if (message is WorkoutCompleted) {
-      setState(() => showKinesteX.value = false);
-      _showStats();
+  Future<void> _requestCameraPermission() async {
+    final status = await Permission.camera.request();
+    if (status == PermissionStatus.granted) {
+      setState(() => permissionGranted = true);
+    } else {
+      setState(() => permissionGranted = false);
+      _showCameraAccessDeniedAlert();
     }
   }
 
-  void _showStats() {
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: const Text("🎉 Workout Complete!"),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text("Total Calories: ${calories.value}"),
-            Text("Total Reps: ${reps.value}"),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx),
-            child: const Text("OK"),
+  void _showCameraAccessDeniedAlert() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Camera Permission Denied"),
+            content: const Text(
+              "Camera access is required for this feature to work "
+                  "correctly.",
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text("OK"),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ],
+          );
+        },
+      );
+    });
+  }
+
+  // Handle messages from the SDK (postMessage bridge).
+  void handleWebViewMessage(WebViewMessage message) {
+    // Some SDK builds might send typed messages like ExitKinestex.
+    if (message is ExitKinestex) {
+      allResourcesLoaded.value = false;
+      showKinesteX.value = false;
+      return;
+    }
+
+    try {
+      final data = message.data;
+      final type = data['type'];
+
+      switch (type) {
+        case 'all_resources_loaded':
+          allResourcesLoaded.value = true;
+          showKinesteX.value = true; // Reveal the SDK layer
+          KinesteXAIFramework.sendAction(
+            "workout_activity_action",
+            "start",
+          );
+          break;
+
+        case 'workout_exit_request':
+        // Keep mounted but hide behind host UI.
+          allResourcesLoaded.value = false;
+          showKinesteX.value = false;
+          break;
+
+        case 'workout_overview':
+        // Optional: handle overview
+          break;
+
+        case 'error_occurred':
+          final errorMsg = data['message']?.toString() ?? 'Unknown error';
+          print('Error from KinesteX SDK: $errorMsg');
+          break;
+
+        default:
+          break;
+      }
+    } catch (_) {
+      allResourcesLoaded.value = false;
+      showKinesteX.value = false;
+    }
+  }
+
+  // Always-mounted background KinesteX layer, invisible until loaded.
+  Widget buildAlwaysMountedKinesteXLayer() {
+    return ValueListenableBuilder<bool>(
+      valueListenable: showKinesteX,
+      builder: (context, isVisible, _) {
+        return IgnorePointer(
+          ignoring: !isVisible,
+          child: AnimatedOpacity(
+            duration: const Duration(milliseconds: 250),
+            opacity: isVisible ? 1.0 : 0.0,
+            child: KinesteXAIFramework.createCustomWorkoutView(
+              customWorkouts: customWorkoutExercises,
+              isShowKinestex: showKinesteX,
+              isLoading: sdkLoading,
+              onMessageReceived: handleWebViewMessage,
+            ),
           ),
+        );
+      },
+    );
+  }
+
+  // Small corner status indicator (top-right). Not fullscreen.
+  Widget buildCornerIndicator() {
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.only(top: 8, right: 8),
+        child: ValueListenableBuilder<bool>(
+          valueListenable: allResourcesLoaded,
+          builder: (context, loaded, _) {
+            return ValueListenableBuilder<bool>(
+              valueListenable: showKinesteX,
+              builder: (context, visible, __) {
+                // Decide appearance
+                Color bg = Colors.black.withOpacity(0.75);
+                Color text = Colors.white;
+                IconData icon = Icons.hourglass_bottom;
+                String label = 'KinesteX loading...';
+
+                if (!permissionGranted) {
+                  bg = Colors.red.withOpacity(0.85);
+                  icon = Icons.videocam_off;
+                  label = 'Camera permission required';
+                } else if (!loaded) {
+                  bg = Colors.orange.withOpacity(0.85);
+                  icon = Icons.downloading;
+                  label = 'Loading in background';
+                } else if (loaded && visible) {
+                  bg = Colors.green.withOpacity(0.85);
+                  icon = Icons.check_circle;
+                  label = 'All resources loaded';
+                } else if (loaded && !visible) {
+                  bg = Colors.grey.withOpacity(0.85);
+                  icon = Icons.visibility_off;
+                  label = 'KinesteX hidden';
+                }
+
+                return Container(
+                  constraints: const BoxConstraints(maxWidth: 260),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 10,
+                  ),
+                  decoration: BoxDecoration(
+                    color: bg,
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.3),
+                        blurRadius: 8,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(icon, color: text, size: 18),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          label,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: text,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      if (!permissionGranted)
+                        TextButton(
+                          onPressed: _requestCameraPermission,
+                          child: const Text(
+                            'Grant',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        )
+                      else if (loaded && !visible)
+                        TextButton(
+                          onPressed: () {
+                            showKinesteX.value = true;
+                            KinesteXAIFramework.sendAction(
+                              "workout_activity_action",
+                              "start",
+                            );
+                          },
+                          child: const Text(
+                            'Show',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        )
+                      else if (!loaded)
+                          const SizedBox(
+                            height: 16,
+                            width: 16,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: Colors.white,
+                            ),
+                          ),
+                    ],
+                  ),
+                );
+              },
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    // KinesteX is ALWAYS mounted at the back. A small corner indicator
+    // shows status; no fullscreen overlays.
+    return Scaffold(
+      body: Stack(
+        children: [
+          Positioned.fill(child: buildAlwaysMountedKinesteXLayer()),
+          Positioned(top: 0, right: 0, child: buildCornerIndicator())
         ],
       ),
     );
   }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Advanced Workout')),
-      body: ValueListenableBuilder<bool>(
-        valueListenable: showKinesteX,
-        builder: (context, isShowing, _) {
-          if (isShowing) {
-            return KinesteXAIFramework.createCustomWorkoutView(
-              customWorkouts: customWorkoutExercises,
-              isShowKinestex: showKinesteX,
-              isLoading: ValueNotifier<bool>(false),
-              customParams: {"planC": "#FF5722"},
-              onMessageReceived: handleWebViewMessage,
-            );
-          }
-
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildStatCard("Reps", reps),
-                _buildStatCard("Calories", calories),
-                _buildStatCard("Feedback", feedback),
-                _buildStatCard("Exercise", currentExercise),
-                const SizedBox(height: 32),
-                ElevatedButton(
-                  onPressed: () => showKinesteX.value = true,
-                  child: const Text('Start Workout'),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  Widget _buildStatCard(String label, ValueNotifier notifier) {
-    return Card(
-      margin: const EdgeInsets.all(8),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text("$label: ", style: const TextStyle(fontWeight: FontWeight.bold)),
-            ValueListenableBuilder(
-              valueListenable: notifier,
-              builder: (_, value, __) => Text(value.toString()),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 }
+
 ```
-
----
-
-## Message Types Used in Examples
-
-| Message Type | When to Use | Example |
-|--------------|-------------|---------|
-| `Reps` | Track repetition count | `message.data['value']` |
-| `Mistake` | Show form feedback | `message.data['value']` |
-| `WorkoutStarted` | Detect workout start | - |
-| `ExerciseCompleted` | Track exercise progress | `message.data['exercise']` |
-| `WorkoutOverview` | Get total stats | `message.data['totalCalories']` |
-| `WorkoutCompleted` | Handle workout end | - |
-| `ExitKinestex` | User closed view | - |
-
----
 
 ## Next Steps
 
 - **[View integration guide](../integration/custom/custom-workout.md)**
 - **[See all message types](../data.md)**
-- **[Try other examples](./code-samples.md)**

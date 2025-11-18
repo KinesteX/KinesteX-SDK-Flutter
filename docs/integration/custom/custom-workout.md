@@ -3,7 +3,44 @@
 Create personalized workout sequences with custom exercises, repetitions, durations, and rest periods.
 
 ---
+## Custom Workout Flow Sequence
 
+```
+┌─────────────────────────────────────────────────────┐
+│ 1. SDK Initialization                               │
+└─────────────────────────────────────────────────────┘
+                        ↓
+┌─────────────────────────────────────────────────────┐
+│ 2. Verification & Setup                             │
+│    - Host sends initial data with customWorkout-    │
+│      Exercises array                                │
+│    - SDK validates exercises                        │
+│    - SDK loads AI models & assets in parallel       │
+└─────────────────────────────────────────────────────┘
+                        ↓
+┌─────────────────────────────────────────────────────┐
+│ 3. Resource Loading                                 │
+│    - Exercise AI models load                        │
+│    - Audio files load                               │
+│    - Pose tracking model initializes                │
+│    - SDK sends: all_resources_loaded                │
+└─────────────────────────────────────────────────────┘
+                        ↓
+┌─────────────────────────────────────────────────────┐
+│ 4. Start Command                                    │
+│    - Host sends: workout_activity_action: "start"   │
+│    - SDK navigates to workout execution             │
+└─────────────────────────────────────────────────────┘
+                        ↓
+┌─────────────────────────────────────────────────────┐
+│ 5. Workout Execution                                │
+│    - User performs exercises                        │
+│    - SDK tracks motion & provides feedback          │
+│    - Rest periods occur between exercises (if set)  │
+└─────────────────────────────────────────────────────┘
+```
+
+---
 ## Quick Start
 
 ### 1. Define Your Workout
@@ -11,11 +48,11 @@ Create personalized workout sequences with custom exercises, repetitions, durati
 ```dart
 final List<WorkoutSequenceExercise> customWorkoutExercises = [
     const WorkoutSequenceExercise(
-      exerciseId: "jz73VFlUyZ9nyd64OjRb",
-      reps: 15,
-      duration: null,
-      includeRestPeriod: true,
-      restDuration: 20,
+      exerciseId: "jz73VFlUyZ9nyd64OjRb", // exercise id from kinestex api or admin panel
+      reps: 15, // reps for the exercise
+      duration: null,  // duration for the exercise (null if not applicable and person has unlimited time to complete specified number of reps)
+      includeRestPeriod: true, // include rest period before the exercise
+      restDuration: 20, // rest duration in seconds before the exercise
     ),
     const WorkoutSequenceExercise(
       exerciseId: "ZVMeLsaXQ9Tzr5JYXg29",
@@ -56,14 +93,14 @@ void initState() {
 }
 ```
 
-### 3. Create Workout View
+### 3. Create Workout View And Render it Conditionally in the background, until we receive "all_resources_loaded" message (see below)
 
 ```dart
 ValueNotifier<bool> showKinesteX = ValueNotifier<bool>(false);
 
 Widget buildWorkout() {
   return KinesteXAIFramework.createCustomWorkoutView(
-    customWorkouts: customWorkoutExercises,
+    customWorkouts: customWorkoutExercises, // include defined exercise sequence
     isShowKinestex: showKinesteX,
     isLoading: ValueNotifier<bool>(false),
     onMessageReceived: (message) {
@@ -73,30 +110,24 @@ Widget buildWorkout() {
 }
 ```
 
-### 4. Handle Messages
+### 4. Handle Messages Received from the SDK 
 
 ```dart
 void handleWebViewMessage(WebViewMessage message) {
-  if (message is ExitKinestex) {
-    setState(() => showKinesteX.value = false);
-  } else if (message is Reps) {
-    print("Reps: ${message.data['value']}");
-  } else if (message is Mistake) {
-    print("Feedback: ${message.data['value']}");
-  } else if (message is WorkoutCompleted) {
-    print("Workout finished!");
-    setState(() => showKinesteX.value = false);
+  if (message.data['type'] == 'all_resources_loaded') {
+    print("All resources loaded");
+    setState((){
+      print("Workout is ready to be displayed to users");
+      showKinesteX.value = true;
+    });
+    KinesteXAIFramework.sendAction("workout_activity_action", "start");
+  } else if (message.data['type'] == 'workout_exit_request') {
+    setState(() {
+      print("Workout exited by user");
+      showKinesteX.value = false;
+    });
   }
 }
-```
-
-### 5. Start Workout
-
-```dart
-ElevatedButton(
-  onPressed: () => showKinesteX.value = true,
-  child: const Text('Start Workout'),
-)
 ```
 
 ---
@@ -150,251 +181,12 @@ WorkoutSequenceExercise(
 
 ---
 
-## Getting Exercise IDs
-
-### Option 1: Use Common Exercise IDs
-```dart
-exerciseId: 'jz73VFlUyZ9nyd64OjRb'
-exerciseId: 'ZVMeLsaXQ9Tzr5JYXg29'
-exerciseId: 'gJGOiZhCvJrhEP7sTy78'
-```
-
-### Option 2: Fetch from Content API
-```dart
-final exercises = await KinesteXAIFramework.fetchContent(
-  contentType: ContentType.EXERCISES,
-);
-// Use exercise IDs from the response
-```
-
-### Option 3: Get from Admin Panel
-Contact support@kinestex.com to access your KinesteX admin dashboard and browse available exercise IDs.
-
----
-
-## Available Messages
-
-| Message | When It Fires | Useful Data |
-|---------|---------------|-------------|
-| `WorkoutStarted` | Workout begins | - |
-| `Reps` | Each rep completed | `message.data['value']` = rep count |
-| `Mistake` | Form error detected | `message.data['value']` = feedback text |
-| `ExerciseCompleted` | Exercise finishes | Exercise details |
-| `WorkoutCompleted` | Workout finishes | Total stats |
-| `ExitKinestex` | User exits | - |
-
----
-
-## Complete Example
-
-```dart
-import 'package:flutter/material.dart';
-import 'package:kinestex_sdk_flutter/kinestex_sdk.dart';
-
-class CustomWorkoutScreen extends StatefulWidget {
-  const CustomWorkoutScreen({Key? key}) : super(key: key);
-
-  @override
-  State<CustomWorkoutScreen> createState() => _CustomWorkoutScreenState();
-}
-
-class _CustomWorkoutScreenState extends State<CustomWorkoutScreen> {
-  final List<WorkoutSequenceExercise> customWorkoutExercises = [
-    const WorkoutSequenceExercise(
-      exerciseId: "jz73VFlUyZ9nyd64OjRb",
-      reps: 15,
-      duration: null,
-      includeRestPeriod: true,
-      restDuration: 20,
-    ),
-    const WorkoutSequenceExercise(
-      exerciseId: "ZVMeLsaXQ9Tzr5JYXg29",
-      reps: 10,
-      duration: 30,
-      includeRestPeriod: true,
-      restDuration: 15,
-    ),
-    // duplicate of the exercise above to create a set
-    const WorkoutSequenceExercise(
-      exerciseId: "ZVMeLsaXQ9Tzr5JYXg29",
-      reps: 10,
-      duration: 30,
-      includeRestPeriod: true,
-      restDuration: 15,
-    ),
-    const WorkoutSequenceExercise(
-      exerciseId: "gJGOiZhCvJrhEP7sTy78",
-      reps: 20,
-      duration: null,
-      includeRestPeriod: false,
-      restDuration: 0,
-    ),
-  ];
-
-  ValueNotifier<bool> showKinesteX = ValueNotifier<bool>(false);
-  ValueNotifier<int> reps = ValueNotifier<int>(0);
-  ValueNotifier<String> feedback = ValueNotifier<String>("Ready!");
-
-  @override
-  void initState() {
-    super.initState();
-    KinesteXAIFramework.initialize(
-      apiKey: "your-api-key",
-      companyName: "YourCompany",
-      userId: "user-id",
-    );
-  }
-
-  void handleWebViewMessage(WebViewMessage message) {
-    if (message is ExitKinestex) {
-      setState(() => showKinesteX.value = false);
-    } else if (message is Reps) {
-      setState(() => reps.value = message.data['value'] ?? 0);
-    } else if (message is Mistake) {
-      setState(() => feedback.value = message.data['value'] ?? 'Good form!');
-    } else if (message is WorkoutCompleted) {
-      setState(() => showKinesteX.value = false);
-      _showCompletionDialog();
-    }
-  }
-
-  void _showCompletionDialog() {
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: const Text("Great Job!"),
-        content: const Text("You completed your workout!"),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx),
-            child: const Text("OK"),
-          ),
-        ],
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Custom Workout')),
-      body: ValueListenableBuilder<bool>(
-        valueListenable: showKinesteX,
-        builder: (context, isShowing, _) {
-          if (isShowing) {
-            return KinesteXAIFramework.createCustomWorkoutView(
-              customWorkouts: customWorkoutExercises,
-              isShowKinestex: showKinesteX,
-              isLoading: ValueNotifier<bool>(false),
-              onMessageReceived: handleWebViewMessage,
-            );
-          }
-
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ValueListenableBuilder<int>(
-                  valueListenable: reps,
-                  builder: (_, count, __) => Text(
-                    'Reps: $count',
-                    style: const TextStyle(fontSize: 24),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                ValueListenableBuilder<String>(
-                  valueListenable: feedback,
-                  builder: (_, text, __) => Text(
-                    text,
-                    style: const TextStyle(fontSize: 18),
-                  ),
-                ),
-                const SizedBox(height: 32),
-                ElevatedButton(
-                  onPressed: () => showKinesteX.value = true,
-                  child: const Text('Start Workout'),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
-    );
-  }
-}
-```
-
----
-
-## Customization
-
-### Add Custom Colors
-```dart
-KinesteXAIFramework.createCustomWorkoutView(
-  customWorkouts: customWorkoutExercises,
-  customParams: {
-    "planC": "#FF5722",  // Your brand color
-  },
-  // ... other parameters
-)
-```
-
-### Add User Details
-```dart
-KinesteXAIFramework.createCustomWorkoutView(
-  customWorkouts: customWorkoutExercises,
-  user: UserDetails(
-    name: "John Doe",
-    age: 30,
-    height: 180,
-    weight: 75,
-  ),
-  // ... other parameters
-)
-```
-
----
-
-## Common Patterns
-
-### Create Sets (Repeat Exercises)
-```dart
-final customWorkouts = [
-  // Set 1
-  WorkoutSequenceExercise(exerciseId: 'jz73VFlUyZ9nyd64OjRb', reps: 10),
-  WorkoutSequenceExercise(exerciseId: 'jz73VFlUyZ9nyd64OjRb', duration: 30),
-
-  // Set 2
-  WorkoutSequenceExercise(exerciseId: 'jz73VFlUyZ9nyd64OjRb', reps: 10),
-  WorkoutSequenceExercise(exerciseId: 'jz73VFlUyZ9nyd64OjRb', duration: 30),
-
-  // Set 3
-  WorkoutSequenceExercise(exerciseId: 'jz73VFlUyZ9nyd64OjRb', reps: 10),
-];
-```
-
-### Circuit Training
-```dart
-final customWorkouts = [
-  WorkoutSequenceExercise(exerciseId: 'jz73VFlUyZ9nyd64OjRb', reps: 15, restDuration: 10),
-  WorkoutSequenceExercise(exerciseId: 'ZVMeLsaXQ9Tzr5JYXg29', reps: 10, restDuration: 10),
-  WorkoutSequenceExercise(exerciseId: 'gJGOiZhCvJrhEP7sTy78', reps: 12, restDuration: 10),
-  WorkoutSequenceExercise(exerciseId: 'jz73VFlUyZ9nyd64OjRb', duration: 30, restDuration: 60),
-  // Repeat circuit...
-];
-```
-
----
-
 ## Troubleshooting
 
 **Workout doesn't start?**
 - Ensure SDK is initialized before showing the view
 - Verify exercise IDs are valid
-
-**No real-time feedback?**
-- Check your `onMessageReceived` callback is implemented
-- Make sure you're handling the message types you need
+- Check "error_occurred" messages for issues
 
 **Exercise validation errors?**
 - Use simple exercise names or valid IDs from the API
