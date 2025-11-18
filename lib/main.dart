@@ -8,17 +8,19 @@ import 'home.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await KinesteXAIFramework.initialize(
-    apiKey: "13c5398cf7a98e3469f6fc8a9a5b2b9d5c8a4814",
-    companyName: "KinesteX",
-    userId: "GibOrTgo2KNuldDYrTARMnqba2T2",
+    apiKey: "your-api-key",
+    companyName: "your-company",
+    userId: "your-user-id",
   );
-  runApp(BlocProvider(
-    create: (context) => DefaultCubit(),
-    child: const MaterialApp(
-      // home: ContentView(),
-      home: MyHomePage(),
+  runApp(
+    BlocProvider(
+      create: (context) => DefaultCubit(),
+      child: const MaterialApp(
+        // home: ContentView(),
+        home: MyHomePage(),
+      ),
     ),
-  ));
+  );
 }
 
 class MyApp extends StatefulWidget {
