@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(flutter analyze lib/content/equipment_section.dart lib/content/workout_detail_view.dart lib/content/exercise_card.dart)"
+    ]
+  }
+}

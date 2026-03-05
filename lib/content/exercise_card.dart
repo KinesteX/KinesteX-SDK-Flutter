@@ -1,6 +1,7 @@
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:kinestex_flutter_demo/content/equipment_section.dart';
 import 'package:kinestex_sdk_flutter/kinestex_sdk.dart';
 import 'package:video_player/video_player.dart';
 
@@ -161,6 +162,11 @@ class _ExerciseCardState extends State<ExerciseCard> {
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             Text(e.commonMistakes, style: const TextStyle(fontSize: 12)),
+          ],
+
+          if (e.equipment.isNotEmpty) ...[
+            const SizedBox(height: 12),
+            EquipmentSection(equipment: e.equipment),
           ],
         ],
       ),

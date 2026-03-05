@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:kinestex_flutter_demo/content/body_parts_wrap.dart';
+import 'package:kinestex_flutter_demo/content/equipment_section.dart';
 import 'package:kinestex_flutter_demo/content/exercise_card.dart';
 import 'package:kinestex_sdk_flutter/kinestex_sdk.dart';
 
@@ -71,6 +72,10 @@ class WorkoutDetailView extends StatelessWidget {
             BodyPartsWrap(items: workout.bodyParts),
 
             const Divider(height: 32),
+
+            // Equipment
+            EquipmentSection(equipment: workout.equipment),
+            if (workout.equipment.isNotEmpty) const Divider(height: 32),
 
             // Exercises list
             Text(
